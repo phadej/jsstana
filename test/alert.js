@@ -13,9 +13,8 @@ describe("alert example", function () {
     var found = false;
     var syntax = esprima.parse(source);
 
-    var alertCallMatcher = jsstana.pattern("(call alert ?argument)");
     jsstana.traverse(syntax, function (node) {
-      var m = alertCallMatcher(node);
+      var m = jsstana.match("(call alert ?argument)", node);
       if (m) {
         found = m.argument;
         // console.log("alert called with argument", m.argument);

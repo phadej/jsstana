@@ -10,7 +10,7 @@ describe("lookup", function () {
   it("makes it easier to work with properties", function () {
     var syntax = esprima.parse("foo.bar.baz");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(lookup foo.bar.baz)");
+    var matcher = jsstana.match("(lookup foo.bar.baz)");
 
     assert.deepEqual(matcher(node), {});
   });
@@ -18,7 +18,7 @@ describe("lookup", function () {
   it("makes it easier to work with properties 2", function () {
     var syntax = esprima.parse("foo.quux.baz");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(lookup foo.bar.baz)");
+    var matcher = jsstana.match("(lookup foo.bar.baz)");
 
     assert.deepEqual(matcher(node), undefined);
   });
@@ -26,7 +26,7 @@ describe("lookup", function () {
   it("makes it easier to work with properties 2", function () {
     var syntax = esprima.parse("foo.bar");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(lookup ?object.?property)");
+    var matcher = jsstana.match("(lookup ?object.?property)");
 
     var m = matcher(node);
 

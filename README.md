@@ -11,9 +11,9 @@ var esprima = require("esprima");
 var contents = // ...
 var syntax = esprima.parse(syntax);
 
-var alertCallMatcher = jsstana.pattern("(call alert ?argument)");
 jsstana.traverse(syntax, function (node) {
-	var m = alertCallMatcher(node);
+    jsstana.traverse(syntax, function (node) {
+     var m = jsstana.match("(call alert ?argument)", node);
 	if (m) {
 		console.log("alert called with argument", m.argument);
 	}

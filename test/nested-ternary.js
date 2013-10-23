@@ -16,8 +16,8 @@ describe("nested-ternary", function () {
   it("finds nested ternary", function () {
     var found = false;
     var syntax = esprima.parse(source);
-    var nestedMatcherCon = jsstana.pattern("(ternary ?cond (ternary))");
-    var nestedMatcherAlt = jsstana.pattern("(ternary ?cond ? (ternary))");
+    var nestedMatcherCon = jsstana.match("(ternary ?cond (ternary))");
+    var nestedMatcherAlt = jsstana.match("(ternary ?cond ? (ternary))");
 
     jsstana.traverse(syntax, function (node) {
       if (nestedMatcherAlt(node) !== undefined) {

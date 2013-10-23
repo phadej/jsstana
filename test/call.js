@@ -10,7 +10,7 @@ describe("call", function () {
   it("zero arguments", function () {
     var syntax = esprima.parse("fun()");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(call)");
+    var matcher = jsstana.match("(call)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -19,7 +19,7 @@ describe("call", function () {
   it("first argument matches function", function () {
     var syntax = esprima.parse("fun()");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(call fun)");
+    var matcher = jsstana.match("(call fun)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -28,7 +28,7 @@ describe("call", function () {
   it("first argument matches function, not match", function () {
     var syntax = esprima.parse("fun()");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(call wrong)");
+    var matcher = jsstana.match("(call wrong)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), undefined);
@@ -38,7 +38,7 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun()");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.pattern("(call (lookup module.fun))");
+    var matcher = jsstana.match("(call (lookup module.fun))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -48,7 +48,7 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun(foo, bar)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.pattern("(call (lookup module.fun) foo bar)");
+    var matcher = jsstana.match("(call (lookup module.fun) foo bar)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -58,7 +58,7 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.pattern("(call (lookup module.fun) foo bar)");
+    var matcher = jsstana.match("(call (lookup module.fun) foo bar)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -68,7 +68,7 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun(foo, bar)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.pattern("(call (lookup module.fun) foo bar (undefined))");
+    var matcher = jsstana.match("(call (lookup module.fun) foo bar (undefined))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -78,7 +78,7 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.pattern("(call (lookup module.fun) foo bar (undefined))");
+    var matcher = jsstana.match("(call (lookup module.fun) foo bar (undefined))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), undefined);

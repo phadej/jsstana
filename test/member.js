@@ -10,7 +10,7 @@ describe("member", function () {
   it("zero arguments", function () {
     var syntax = esprima.parse("foo.bar");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(member)");
+    var matcher = jsstana.match("(member)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -20,7 +20,7 @@ describe("member", function () {
     it("pattern", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member ?object)");
+      var matcher = jsstana.match("(member ?object)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node).object.type, "Identifier");
@@ -29,7 +29,7 @@ describe("member", function () {
     it("identifier", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member foo)");
+      var matcher = jsstana.match("(member foo)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -38,7 +38,7 @@ describe("member", function () {
     it("non-matching identifier", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member bar)");
+      var matcher = jsstana.match("(member bar)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -49,7 +49,7 @@ describe("member", function () {
     it("captures property or subscript", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member foo ?prop)");
+      var matcher = jsstana.match("(member foo ?prop)");
 
       var m = matcher(node);
       assert.equal(m.prop.type, "Identifier");
@@ -58,7 +58,7 @@ describe("member", function () {
     it("supports var assigment", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member foo bar)");
+      var matcher = jsstana.match("(member foo bar)");
 
       assert.deepEqual(matcher(node), {});
     });
@@ -66,7 +66,7 @@ describe("member", function () {
     it("works with array subscription", function () {
       var syntax = esprima.parse("foo[bar]");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member foo bar)");
+      var matcher = jsstana.match("(member foo bar)");
 
       assert.deepEqual(matcher(node), {});
     });
@@ -74,7 +74,7 @@ describe("member", function () {
     it("supports var assigment 2", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.pattern("(member foo baz)");
+      var matcher = jsstana.match("(member foo baz)");
 
       assert.deepEqual(matcher(node), undefined);
     });
@@ -85,7 +85,7 @@ describe("property", function () {
   it("matches non-computed MemberExpression", function () {
     var syntax = esprima.parse("foo.bar");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(property)");
+    var matcher = jsstana.match("(property)");
 
     assert.deepEqual(matcher(node), {});
   });
@@ -93,7 +93,7 @@ describe("property", function () {
   it("does not match computed MemberExpression", function () {
     var syntax = esprima.parse("foo[bar]");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(property)");
+    var matcher = jsstana.match("(property)");
 
     assert.deepEqual(matcher(node), undefined);
   });
@@ -101,7 +101,7 @@ describe("property", function () {
   it("does not match computed MemberExpression 2", function () {
     var syntax = esprima.parse("foo[0]");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(property)");
+    var matcher = jsstana.match("(property)");
 
     assert.deepEqual(matcher(node), undefined);
   });
@@ -111,7 +111,7 @@ describe("subscript", function () {
   it("matches computed MemberExpression", function () {
     var syntax = esprima.parse("foo[bar]");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(subscript)");
+    var matcher = jsstana.match("(subscript)");
 
     assert.deepEqual(matcher(node), {});
   });
@@ -119,7 +119,7 @@ describe("subscript", function () {
   it("does not match non-computed MemberExpression", function () {
     var syntax = esprima.parse("foo.bar");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.pattern("(subscript)");
+    var matcher = jsstana.match("(subscript)");
 
     assert.deepEqual(matcher(node), undefined);
   });

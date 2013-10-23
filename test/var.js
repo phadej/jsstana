@@ -10,7 +10,7 @@ describe("var", function () {
   it("zero arguments", function () {
     var syntax = esprima.parse("var foo = 1;");
     var node = syntax.body[0].declarations[0];
-    var matcher = jsstana.pattern("(var)");
+    var matcher = jsstana.match("(var)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -20,7 +20,7 @@ describe("var", function () {
     it("pattern", function () {
       var syntax = esprima.parse("var foo = 1;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var ?name)");
+      var matcher = jsstana.match("(var ?name)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), { name: "foo" });
@@ -29,7 +29,7 @@ describe("var", function () {
     it("identifier", function () {
       var syntax = esprima.parse("var foo = 1;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var foo)");
+      var matcher = jsstana.match("(var foo)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -38,7 +38,7 @@ describe("var", function () {
     it("non-matching identifier", function () {
       var syntax = esprima.parse("var foo = 1;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var bar)");
+      var matcher = jsstana.match("(var bar)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -49,7 +49,7 @@ describe("var", function () {
     it("captures init", function () {
       var syntax = esprima.parse("var foo = 1;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var foo ?init)");
+      var matcher = jsstana.match("(var foo ?init)");
 
       var m = matcher(node);
       assert.equal(m.init.type, "Literal");
@@ -58,7 +58,7 @@ describe("var", function () {
     it("supports var assigment", function () {
       var syntax = esprima.parse("var foo = bar;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var foo bar)");
+      var matcher = jsstana.match("(var foo bar)");
 
       assert.deepEqual(matcher(node), {});
     });
@@ -66,7 +66,7 @@ describe("var", function () {
     it("supports var assigment 2", function () {
       var syntax = esprima.parse("var foo = bar;");
       var node = syntax.body[0].declarations[0];
-      var matcher = jsstana.pattern("(var foo baz)");
+      var matcher = jsstana.match("(var foo baz)");
 
       assert.deepEqual(matcher(node), undefined);
     });
