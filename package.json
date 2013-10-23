@@ -1,0 +1,44 @@
+{
+  "name": "jsstana",
+  "description": "s-expression match patterns for Mozilla Parser AST",
+  "version": "0.0.1",
+  "homepage": "https://github.com/phadej/jsstana",
+  "author": {
+    "name": "Oleg Grenrus",
+    "email": "oleg.grenrus@iki.fi",
+    "url": "http://oleg.fi/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phadej/jsstana.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phadej/jsstana/issues"
+  },
+  "licenses": [
+    {
+      "type": "BSD3",
+      "url": "https://github.com/phadej/jsstana/blob/master/LICENSE-BSD3"
+    }
+  ],
+  "main": "lib/patterns",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt mocha"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt": "~0.4.1",
+    "esprima": "~1.0.4",
+    "escodegen": "0.0.27"
+  },
+  "keywords": [],
+  "dependencies": {
+    "packrattle": "~2.1.0",
+    "underscore": "~1.5.2"
+  }
+}
