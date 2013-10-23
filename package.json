@@ -26,12 +26,18 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt mocha"
+    "test": "grunt",
+    "blanket": {
+      "pattern": "lib",
+      "data-cover-never": "node_modules"
+    }
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-watch": "~0.5.3",
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt-mocha-cov": "0.0.7",
     "grunt": "~0.4.1",
     "esprima": "~1.0.4",
     "escodegen": "0.0.27"

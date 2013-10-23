@@ -6,12 +6,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     simplemocha: {
       options: {
-        globals: ["should"],
         timeout: 3000,
         ui: "bdd",
         reporter: "spec"
       },
 
+      all: { src: "test/**/*.js" }
+    },
+    mochacov: {
+      options: {
+        reporter: "html-cov",
+        output: "coverage.html",
+      },
       all: { src: "test/**/*.js" }
     },
     jshint: {
@@ -48,6 +54,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-simple-mocha");
+  grunt.loadNpmTasks("grunt-mocha-cov");
 
   // Default task.
   grunt.registerTask("default", ["jshint", "simplemocha"]);
