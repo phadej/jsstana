@@ -9,7 +9,7 @@ var esprima = require("esprima");
 describe("traverse()", function () {
   it("calls callback on each node", function () {
     var i = 0;
-    var syntax = esprima.parse("var foo = 1;");
+    var syntax = esprima.parse("var foo = 1;", { comments: true, tokens: true, loc: true, range: true });
 
     jsstana.traverse(syntax, function () {
       i += 1;
