@@ -29,6 +29,10 @@ jsstana.traverse(syntax, function (node) {
 
 matches `undefined` node
 
+#### (return value)
+
+Matches `ReturnStatement`.
+
 #### (var name init)
 
 Matches `VariableDeclarator
@@ -77,6 +81,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 0.0.2 Dev setup
 - 0.0.1 Preview release
 
 ## License
