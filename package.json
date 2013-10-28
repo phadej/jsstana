@@ -38,6 +38,7 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-simple-mocha": "~0.4.0",
     "grunt-mocha-cov": "0.0.7",
+    "grunt-literate": "~0.1.1",
     "grunt": "~0.4.1",
     "esprima": "~1.0.4",
     "escodegen": "0.0.27"

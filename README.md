@@ -1,4 +1,3 @@
-
 # jsstana [![Build Status](https://secure.travis-ci.org/phadej/jsstana.png?branch=master)](http://travis-ci.org/phadej/jsstana)
 
 s-expression match patterns for [Mozilla Parser AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API)
@@ -22,25 +21,19 @@ jsstana.traverse(syntax, function (node) {
 ```
 
 ## Documentation
-
 ### Pattern syntax
-
 #### (undefined)
 
 matches `undefined` node
-
 #### (return value)
 
 Matches `ReturnStatement`.
-
 #### (var name init)
 
 Matches `VariableDeclarator
-
 #### (call callee arg0...argn)
 
 Matches `CallExpression`.
-
 #### (member object property)
 
 Matches `MemberExpression`.
@@ -52,16 +45,13 @@ Matches non computed `MemberExpression` i.e. `foo.bar`.
 #### (subscript object property)
 
 Matches computed `MemberExpression` i.e. `foo[bar]`.
-
 #### (lookup var.name)
 
 Helper macro for nested variable access.
 `(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
-
 #### (ternary test con alt)
 
 Matches `ConditionalExpression`.
-
 ### match(pattern, node)
 
 Match `node` against `pattern`.
@@ -71,8 +61,6 @@ Otherwise returns `undefined`.
 This function is autocurried ie. when one argument is passed, returns function `node -> matchresult`.
 
 This function is also memoized on the pattern, ie each pattern is compiled only once.
-
-
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
