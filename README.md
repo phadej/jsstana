@@ -28,12 +28,30 @@ matches `undefined` node
 #### (return value)
 
 Matches `ReturnStatement`.
+#### (literal value)
+
+Matches `Literal`.
+
+There are some additional version:
+- `(literal-string value)` - string values
+- `(literal-number value)` - number values
+- `(literal-bool value)` - boolean values
+- `(literal-regexp value)` - regular expressions
+- `(true)` - matches `true`
+- `(false)` - matches `false`
+- `(null)` - matches `null`
+- `(intinity)` - matches `Infinity`
+- `(nan)` - matches `NaN`
+- `(undefined)` - matches `undefined`
 #### (var name init)
 
-Matches `VariableDeclarator
+Matches `VariableDeclarator`.
 #### (call callee arg0...argn)
 
 Matches `CallExpression`.
+#### (expression expr)
+
+Matches expression statement, `ExpressionStatement`.
 #### (member object property)
 
 Matches `MemberExpression`.
