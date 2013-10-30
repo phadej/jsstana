@@ -54,33 +54,39 @@ describe("call", function () {
     assert.deepEqual(matcher(node), {});
   });
 
-  it("consecutive arguments match arguments, more arguments than specified", function () {
+  it("matches exact amout of argument", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz)");
     var node = syntax.body[0].expression;
 
     var matcher = jsstana.match("(call (lookup module.fun) foo bar)");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), {});
-  });
-
-  it("can use (undefined)", function () {
-    var syntax = esprima.parse("module.fun(foo, bar)");
-    var node = syntax.body[0].expression;
-
-    var matcher = jsstana.match("(call (lookup module.fun) foo bar (undefined-node))");
-
-    assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), {});
-  });
-
-  it("can use (undefined)", function () {
-    var syntax = esprima.parse("module.fun(foo, bar, baz)");
-    var node = syntax.body[0].expression;
-
-    var matcher = jsstana.match("(call (lookup module.fun) foo bar (undefined-node))");
-
-    assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("can use (call fun . ?) to match rest arguments", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) . ?)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), {});
+  });
+
+  it("can use (call . ?dotted-syntax) to capture rest arguments", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) foo ? . ?rest)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node).rest.length, 2);
+  });
+
+  it("should have pattern variable after dot", function () {
+    assert.throws(function () {
+      jsstana.match("(call foo . foo)");
+    });
   });
 });

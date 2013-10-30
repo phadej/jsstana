@@ -49,6 +49,10 @@ Matches `VariableDeclarator`.
 #### (call callee arg0...argn)
 
 Matches `CallExpression`.
+
+`(call fun arg1 arg2)` matches exact amount of arguments,
+for arbitrary arguments use
+`(call fun . ?)` or similar dotted list syntax.
 #### (expression expr)
 
 Matches expression statement, `ExpressionStatement`.
