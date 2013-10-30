@@ -70,5 +70,14 @@ describe("var", function () {
 
       assert.deepEqual(matcher(node), undefined);
     });
+
+    it("can use (null-node) to match uninitialized declrations", function () {
+      var syntax = esprima.parse("var foo;");
+      var node = syntax.body[0].declarations[0];
+      var matcher = jsstana.match("(var foo (null-node))");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
   });
 });

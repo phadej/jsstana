@@ -22,9 +22,9 @@ jsstana.traverse(syntax, function (node) {
 
 ## Documentation
 ### Pattern syntax
-#### (undefined)
+#### (null-node)
 
-matches `undefined` node
+Matches `undefined` node.
 #### (return value)
 
 Matches `ReturnStatement`.
