@@ -64,22 +64,25 @@ for arbitrary arguments use
 
 Matches expression statement, `ExpressionStatement`.
 
+#### (binary op lhs rhs)
+
+Matches `BinaryExpression`.
+
 #### (member object property)
 
 Matches `MemberExpression`.
 
-#### (property object property)
-
-Matches non computed `MemberExpression` i.e. `foo.bar`.
-
-#### (subscript object property)
-
-Matches computed `MemberExpression` i.e. `foo[bar]`.
+- (property object property) matches non computed expressions, i.e. `foo.bar`.
+- (subscript object property) matches computed expressions i.e. `foo[bar]`.
 
 #### (lookup var.name)
 
 Helper macro for nested variable access.
 `(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
+
+#### (throw ex)
+
+Matches `ThrowStatement`.
 
 #### (ternary test con alt)
 
@@ -103,6 +106,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 0.0.4 Binary and throw
 - 0.0.3 More rands
   - call dotted syntax
   - literals
