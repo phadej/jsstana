@@ -6,74 +6,68 @@ var jsstana = require("../lib/jsstana.js");
 var assert = require("assert");
 var esprima = require("esprima");
 
-describe("binary", function () {
+describe("unary", function () {
   it("matches binary operation expression nodes", function () {
-    var syntax = esprima.parse("1 + 2;");
+    var syntax = esprima.parse("!true;");
     var node = syntax.body[0].expression;
-    var matcher = jsstana.match("(binary)");
+    var matcher = jsstana.match("(unary)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
   });
 
   it("matches binary operation expression nodes, inside expr", function () {
-    var syntax = esprima.parse("1 + 2;");
+    var syntax = esprima.parse("-1;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary))");
+    var matcher = jsstana.match("(expr (unary))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
   });
 
   it("takes operator as first parameter", function () {
-    var syntax = esprima.parse("1 + 2;");
+    var syntax = esprima.parse("-1;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary +))");
+    var matcher = jsstana.match("(expr (unary -))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
   });
 
-  it("throws if invalid operator given", function () {
-    assert.throws(function () {
-      jsstana.match("(expr (binary +++))");
-    });
-  });
-
   it("takes operator as first parameter, capture", function () {
-    var syntax = esprima.parse("1 + 2;");
+    var syntax = esprima.parse("-1;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary ?op))");
+    var matcher = jsstana.match("(expr (unary ?op))");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), { op: "+" });
+    assert.deepEqual(matcher(node), { op: "-" });
   });
 
   it("takes operator as first parameter, non-match", function () {
-    var syntax = esprima.parse("1 + 2;");
+    var syntax = esprima.parse("~1;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary -))");
+    var matcher = jsstana.match("(expr (unary -))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), undefined);
   });
 
-  it("takes operands as second and third parameters, non-match", function () {
-    var syntax = esprima.parse("1 + 2;");
+  it("takes operand as second paramater, non-match", function () {
+    var syntax = esprima.parse("+1;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary + (number ?number) 2))");
+    var matcher = jsstana.match("(expr (unary + (number ?number)))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), { number: 1 });
   });
 });
 
-describe("+, -, * etc", function () {
-  it("is the same as (binary op)", function () {
-    var syntax = esprima.parse("1 + 2;");
+describe("~ !", function () {
+  it("is the same as (unary op)", function () {
+    var syntax = esprima.parse("!true;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (+ (number ?number) 2))");
+    var matcher = jsstana.match("(expr (! true))");
 
-    assert.deepEqual(matcher(node), { number: 1 });
+    assert.deepEqual(matcher(node), {});
   });
 });
