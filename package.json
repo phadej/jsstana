@@ -22,7 +22,7 @@
     }
   ],
   "bin": {
-    "jsgrep": "./bin/esgrep.js"
+    "jsgrep": "./bin/jsgrep.js"
   },
   "main": "lib/jsstana",
   "engines": {
