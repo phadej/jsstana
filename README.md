@@ -76,6 +76,10 @@ There are some additional version:
 
 Matches `VariableDeclarator`.
 
+#### (ident name)
+
+Matches `Identifier`.
+
 #### (call callee arg0...argn)
 
 Matches `CallExpression`.
@@ -149,6 +153,7 @@ or `istanbul cover grunt simplemocha` to do coverage with istanbul.
 
 ## Release History
 
+- 0.0.10 ident pattern
 - 0.0.9 Boolean patterns
 - 0.0.8 Even more rands
   - unary and update expressions
