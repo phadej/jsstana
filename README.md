@@ -36,6 +36,18 @@ jsstana.js:485:   assertArguments("member/property/subscript", 2, arguments, 1);
 
 ### Pattern syntax
 
+#### (not pattern)
+
+Matches when `pattern` doesn't match.
+
+#### (or pattern1 pattern2...)
+
+Matches if any pattern matches, returns first match.
+
+#### (and pattern1 pattern2...)
+
+Matches if all pattern matches, returns combinedMatch
+
 #### (null-node)
 
 Matches `undefined` node.
@@ -137,6 +149,7 @@ or `istanbul cover grunt simplemocha` to do coverage with istanbul.
 
 ## Release History
 
+- 0.0.9 Boolean patterns
 - 0.0.8 Even more rands
   - unary and update expressions
   - drop `literal-` prefix (eg plain `string` now)
