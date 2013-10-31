@@ -33,6 +33,9 @@ module.exports = function(grunt) {
       test: {
         src: ["test/**/*.js"]
       },
+      bin: {
+        src: ["bin/**/*.js"]
+      }
     },
     watch: {
       gruntfile: {
