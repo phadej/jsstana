@@ -118,6 +118,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 0.0.7 jsgrep, third try
 - 0.0.6 jsgrep, second try
 - 0.0.5 jsgrep
   - also new expression
