@@ -26,7 +26,7 @@ The jsgrep example utility is provided
 
 ```bash
 # find assertArguments calls with 4 arguments
-% bin/jsgrep.js '(call assertArguments ? ? ? ?)' lib
+% jsgrep '(call assertArguments ? ? ? ?)' lib
 jsstana.js:224:   assertArguments("true/false/null/infinity/nan/undefined", 0, arguments, 1);
 jsstana.js:255:   assertArguments("literal", 1, arguments, 1);
 jsstana.js:485:   assertArguments("member/property/subscript", 2, arguments, 1);
@@ -118,6 +118,7 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 0.0.6 jsgrep, second try
 - 0.0.5 jsgrep
   - also new expression
 - 0.0.4 Binary and throw
