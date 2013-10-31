@@ -52,3 +52,13 @@ describe("binary", function () {
     assert.deepEqual(matcher(node), { number: 1 });
   });
 });
+
+describe("+, -, * etc", function () {
+  it("is the same as (binary op)", function () {
+    var syntax = esprima.parse("1 + 2;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr (+ (literal-number ?number) 2))");
+
+    assert.deepEqual(matcher(node), { number: 1 });
+  });
+});
