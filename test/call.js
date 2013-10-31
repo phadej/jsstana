@@ -64,6 +64,16 @@ describe("call", function () {
     assert.deepEqual(matcher(node), undefined);
   });
 
+  it("matches iff arguments matches", function () {
+    var syntax = esprima.parse("module.fun(foo, bar)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) foo baz)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
+  });
+
   it("can use (call fun . ?) to match rest arguments", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;

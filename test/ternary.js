@@ -24,4 +24,31 @@ describe("ternary", function () {
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
   });
+
+  it("doesn't match if any argument doesn't match 1", function () {
+    var syntax = esprima.parse("quux ? bar : baz");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(ternary foo bar baz)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("doesn't match if any argument doesn't match 2", function () {
+    var syntax = esprima.parse("foo ? quux : baz");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(ternary foo bar baz)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("doesn't match if any argument doesn't match 3", function () {
+    var syntax = esprima.parse("foo ? bar : quux");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(ternary foo bar baz)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
+  });
 });

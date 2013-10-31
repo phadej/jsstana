@@ -10,6 +10,15 @@ describe("literal", function () {
   describe("zero arguments", function () {
     it("matches literal strings", function () {
       var syntax = esprima.parse("'foo';");
+      var node = syntax.body[0].expression;
+      var matcher = jsstana.match("(literal)");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
+
+    it("matches literal strings, inside expr", function () {
+      var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
       var matcher = jsstana.match("(expr (literal))");
 
@@ -116,6 +125,15 @@ describe("literal-string", function () {
     });
 
     it("doesn't match if different string", function () {
+      var syntax = esprima.parse("'foo'");
+      var node = syntax.body[0].expression;
+      var matcher = jsstana.match("(literal-string foo)");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
+
+    it("doesn't match if different string, inside expr", function () {
       var syntax = esprima.parse("'foo'");
       var node = syntax.body[0];
       var matcher = jsstana.match("(expr (literal-string bar))");
@@ -305,6 +323,15 @@ describe("literal-bool", function () {
 
 describe("literal-regexp", function () {
   describe("zero arguments", function () {
+    it("matches literal regexp", function () {
+      var syntax = esprima.parse("/foo/;");
+      var node = syntax.body[0].expression;
+      var matcher = jsstana.match("(literal-regexp /foo/)");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
+
     it("doesn't match literal strings", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
@@ -341,13 +368,31 @@ describe("literal-regexp", function () {
       assert.deepEqual(matcher(node), undefined);
     });
 
-    it("matches literal regexp", function () {
+    it("matches literal regexp, inside expr", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
       var matcher = jsstana.match("(expr (literal-regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
+    });
+
+    it("doesn't match different literal regexp, inside expr", function () {
+      var syntax = esprima.parse("/foo/;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr (literal-regexp /bar/))");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), undefined);
+    });
+
+    it("doesn't match not regexp, inside expr", function () {
+      var syntax = esprima.parse("1;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr (literal-regexp /bar/))");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), undefined);
     });
   });
 
