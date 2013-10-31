@@ -55,7 +55,7 @@ describe("binary", function () {
   it("takes operands as second and third parameters, non-match", function () {
     var syntax = esprima.parse("1 + 2;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (binary + (literal-number ?number) 2))");
+    var matcher = jsstana.match("(expr (binary + (number ?number) 2))");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), { number: 1 });
@@ -66,7 +66,7 @@ describe("+, -, * etc", function () {
   it("is the same as (binary op)", function () {
     var syntax = esprima.parse("1 + 2;");
     var node = syntax.body[0];
-    var matcher = jsstana.match("(expr (+ (literal-number ?number) 2))");
+    var matcher = jsstana.match("(expr (+ (number ?number) 2))");
 
     assert.deepEqual(matcher(node), { number: 1 });
   });

@@ -55,10 +55,10 @@ describe("literal", function () {
   });
 
   describe("one argument", function () {
-    it("is the same as literal-string", function () {
+    it("is the same as string", function () {
       var syntax = esprima.parse("'foo'");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string foo))");
+      var matcher = jsstana.match("(expr (string foo))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -66,12 +66,12 @@ describe("literal", function () {
   });
 });
 
-describe("literal-string", function () {
+describe("string", function () {
   describe("zero arguments", function () {
     it("matches literal strings", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string))");
+      var matcher = jsstana.match("(expr (string))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -80,7 +80,7 @@ describe("literal-string", function () {
     it("doesn't match literal numbers", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string))");
+      var matcher = jsstana.match("(expr (string))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -89,7 +89,7 @@ describe("literal-string", function () {
     it("doesn't match literal booleans", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string))");
+      var matcher = jsstana.match("(expr (string))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -98,7 +98,7 @@ describe("literal-string", function () {
     it("doesn't match literal null", function () {
       var syntax = esprima.parse("null;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string))");
+      var matcher = jsstana.match("(expr (string))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -107,7 +107,7 @@ describe("literal-string", function () {
     it("doesn't match literal regexp", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string))");
+      var matcher = jsstana.match("(expr (string))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -118,7 +118,7 @@ describe("literal-string", function () {
     it("captures the string", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string ?str))");
+      var matcher = jsstana.match("(expr (string ?str))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), { str: "foo" });
@@ -127,7 +127,7 @@ describe("literal-string", function () {
     it("doesn't match if different string", function () {
       var syntax = esprima.parse("'foo'");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.match("(literal-string foo)");
+      var matcher = jsstana.match("(string foo)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -136,7 +136,7 @@ describe("literal-string", function () {
     it("doesn't match if different string, inside expr", function () {
       var syntax = esprima.parse("'foo'");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-string bar))");
+      var matcher = jsstana.match("(expr (string bar))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -144,12 +144,12 @@ describe("literal-string", function () {
   });
 });
 
-describe("literal-number", function () {
+describe("number", function () {
   describe("zero arguments", function () {
     it("doesn't match literal strings", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number))");
+      var matcher = jsstana.match("(expr (number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -158,7 +158,7 @@ describe("literal-number", function () {
     it("matches literal numbers", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number))");
+      var matcher = jsstana.match("(expr (number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -167,7 +167,7 @@ describe("literal-number", function () {
     it("doesn't match literal booleans", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number))");
+      var matcher = jsstana.match("(expr (number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -176,7 +176,7 @@ describe("literal-number", function () {
     it("doesn't match literal null", function () {
       var syntax = esprima.parse("null;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number))");
+      var matcher = jsstana.match("(expr (number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -185,7 +185,7 @@ describe("literal-number", function () {
     it("doesn't match literal regexp", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number))");
+      var matcher = jsstana.match("(expr (number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -196,7 +196,7 @@ describe("literal-number", function () {
     it("captures the number", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number ?number))");
+      var matcher = jsstana.match("(expr (number ?number))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), { number: 1 });
@@ -205,7 +205,7 @@ describe("literal-number", function () {
     it("doesn't match if different number", function () {
       var syntax = esprima.parse("null;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-number 2))");
+      var matcher = jsstana.match("(expr (number 2))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -213,18 +213,18 @@ describe("literal-number", function () {
 
     it("throws if invalid parameter", function () {
       assert.throws(function () {
-        jsstana.match("(expr (literal-number foo))");
+        jsstana.match("(expr (number foo))");
       });
     });
   });
 });
 
-describe("literal-bool", function () {
+describe("bool", function () {
   describe("zero arguments", function () {
     it("doesn't match literal strings", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool))");
+      var matcher = jsstana.match("(expr (bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -233,7 +233,7 @@ describe("literal-bool", function () {
     it("doesn't match literal numbers", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool))");
+      var matcher = jsstana.match("(expr (bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -242,7 +242,7 @@ describe("literal-bool", function () {
     it("matches literal booleans", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool))");
+      var matcher = jsstana.match("(expr (bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -251,7 +251,7 @@ describe("literal-bool", function () {
     it("doesn't match literal null", function () {
       var syntax = esprima.parse("null;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool))");
+      var matcher = jsstana.match("(expr (bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -260,7 +260,7 @@ describe("literal-bool", function () {
     it("doesn't match literal regexp", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool))");
+      var matcher = jsstana.match("(expr (bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -271,7 +271,7 @@ describe("literal-bool", function () {
     it("captures the boolean", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool ?bool))");
+      var matcher = jsstana.match("(expr (bool ?bool))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), { bool: true });
@@ -280,7 +280,7 @@ describe("literal-bool", function () {
     it("matches if same boolean", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool true))");
+      var matcher = jsstana.match("(expr (bool true))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -289,7 +289,7 @@ describe("literal-bool", function () {
     it("matches if same boolean", function () {
       var syntax = esprima.parse("false;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool false))");
+      var matcher = jsstana.match("(expr (bool false))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -298,7 +298,7 @@ describe("literal-bool", function () {
     it("doesn't match if different boolean", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool false))");
+      var matcher = jsstana.match("(expr (bool false))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -307,7 +307,7 @@ describe("literal-bool", function () {
     it("doesn't match if different boolean 2", function () {
       var syntax = esprima.parse("false;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-bool true))");
+      var matcher = jsstana.match("(expr (bool true))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -315,18 +315,18 @@ describe("literal-bool", function () {
 
     it("throws if invalid parameter", function () {
       assert.throws(function () {
-        jsstana.match("(expr (literal-bool null))");
+        jsstana.match("(expr (bool null))");
       });
     });
   });
 });
 
-describe("literal-regexp", function () {
+describe("regexp", function () {
   describe("zero arguments", function () {
     it("matches literal regexp", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0].expression;
-      var matcher = jsstana.match("(literal-regexp /foo/)");
+      var matcher = jsstana.match("(regexp /foo/)");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -335,7 +335,7 @@ describe("literal-regexp", function () {
     it("doesn't match literal strings", function () {
       var syntax = esprima.parse("'foo';");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp))");
+      var matcher = jsstana.match("(expr (regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -344,7 +344,7 @@ describe("literal-regexp", function () {
     it("doesn't match literal numbers", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp))");
+      var matcher = jsstana.match("(expr (regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -353,7 +353,7 @@ describe("literal-regexp", function () {
     it("doesn't match literal booleans", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp))");
+      var matcher = jsstana.match("(expr (regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -362,7 +362,7 @@ describe("literal-regexp", function () {
     it("doesn't match literal null", function () {
       var syntax = esprima.parse("null;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp))");
+      var matcher = jsstana.match("(expr (regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -371,7 +371,7 @@ describe("literal-regexp", function () {
     it("matches literal regexp, inside expr", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp))");
+      var matcher = jsstana.match("(expr (regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -380,7 +380,7 @@ describe("literal-regexp", function () {
     it("doesn't match different literal regexp, inside expr", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp /bar/))");
+      var matcher = jsstana.match("(expr (regexp /bar/))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -389,7 +389,7 @@ describe("literal-regexp", function () {
     it("doesn't match not regexp, inside expr", function () {
       var syntax = esprima.parse("1;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp /bar/))");
+      var matcher = jsstana.match("(expr (regexp /bar/))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -400,7 +400,7 @@ describe("literal-regexp", function () {
     it("captures the regexp", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp ?regexp))");
+      var matcher = jsstana.match("(expr (regexp ?regexp))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node).regexp.toString(), "/foo/");
@@ -409,7 +409,7 @@ describe("literal-regexp", function () {
     it("matches if same boolean", function () {
       var syntax = esprima.parse("/foo/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp /foo/))");
+      var matcher = jsstana.match("(expr (regexp /foo/))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), {});
@@ -418,7 +418,7 @@ describe("literal-regexp", function () {
     it("doesn't match if different boolean", function () {
       var syntax = esprima.parse("/bar/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp /foo/))");
+      var matcher = jsstana.match("(expr (regexp /foo/))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
@@ -427,7 +427,7 @@ describe("literal-regexp", function () {
     it("doesn't know about regexp equivalence", function () {
       var syntax = esprima.parse("/aa*/;");
       var node = syntax.body[0];
-      var matcher = jsstana.match("(expr (literal-regexp /a+/))");
+      var matcher = jsstana.match("(expr (regexp /a+/))");
 
       assert.deepEqual(matcher(syntax), undefined);
       assert.deepEqual(matcher(node), undefined);
