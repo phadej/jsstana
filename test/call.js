@@ -54,7 +54,7 @@ describe("call", function () {
     assert.deepEqual(matcher(node), {});
   });
 
-  it("matches exact amout of argument", function () {
+  it("matches exact amount of arguments", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz)");
     var node = syntax.body[0].expression;
 
