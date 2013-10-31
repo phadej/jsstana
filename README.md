@@ -49,10 +49,10 @@ Matches `ReturnStatement`.
 Matches `Literal`.
 
 There are some additional version:
-- `(literal-string value)` - string values
-- `(literal-number value)` - number values
-- `(literal-bool value)` - boolean values
-- `(literal-regexp value)` - regular expressions
+- `(string value)` - string values
+- `(number value)` - number values
+- `(bool value)` - boolean values
+- `(regexp value)` - regular expressions
 - `(true)` - matches `true`
 - `(false)` - matches `false`
 - `(null)` - matches `null`
@@ -80,6 +80,20 @@ Matches expression statement, `ExpressionStatement`.
 
 Matches `BinaryExpression`.
 
+Also shorthand syntax is supported, `(+ a b)` is the same as `(binary + a b)`.
+
+#### (unary op value)
+
+Matches `UnaryExpression`.
+
+Also shorthand version works for `!` and `~`: `(~ ?foo)` is the same as `(unary ~ ?foo)`.
+
+#### (update op value)
+
+Matches `UpdateExpression`.
+
+You might want to use `postfix` and `prefix` though.
+
 #### (member object property)
 
 Matches `MemberExpression`.
@@ -91,6 +105,8 @@ Matches `MemberExpression`.
 
 Helper macro for nested variable access.
 `(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
+
+The `foo.bar.baz` will work as `(lookup foo.bar.baz)` as well.
 
 #### (throw ex)
 
@@ -116,8 +132,16 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
 
+Use `grunt mochacov` to generate coverage report with blanket,
+or `istanbul cover grunt simplemocha` to do coverage with istanbul.
+
 ## Release History
 
+- 0.0.8 Even more rands
+  - unary and update expressions
+  - drop `literal-` prefix (eg plain `string` now)
+  - shorthand binary op syntax `(+ a b)`
+  - shorthand lookup syntax
 - 0.0.7 jsgrep, third try
 - 0.0.6 jsgrep, second try
 - 0.0.5 jsgrep
