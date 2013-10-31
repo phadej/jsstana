@@ -20,6 +20,18 @@ jsstana.traverse(syntax, function (node) {
 });
 ```
 
+## jsgrep
+
+The jsgrep example utility is provided
+
+```bash
+# find assertArguments calls with 4 arguments
+% bin/jsgrep.js '(call assertArguments ? ? ? ?)' lib
+jsstana.js:224:   assertArguments("true/false/null/infinity/nan/undefined", 0, arguments, 1);
+jsstana.js:255:   assertArguments("literal", 1, arguments, 1);
+jsstana.js:485:   assertArguments("member/property/subscript", 2, arguments, 1);
+```
+
 ## Documentation
 
 ### Pattern syntax
@@ -106,6 +118,8 @@ Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+- 0.0.5 jsgrep
+  - also new expression
 - 0.0.4 Binary and throw
 - 0.0.3 More rands
   - call dotted syntax
