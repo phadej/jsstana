@@ -109,6 +109,10 @@ Matches `UpdateExpression`.
 
 You might want to use `postfix` and `prefix` though.
 
+#### (assign op var value)
+
+Matches `AssignmentExpression`.
+
 #### (member object property)
 
 Matches `MemberExpression`.
@@ -141,6 +145,35 @@ This function is autocurried ie. when one argument is passed, returns function `
 
 This function is also memoized on the pattern, ie each pattern is compiled only once.
 
+### createMatcher(pattern, [posMatcher])
+
+Create matcher. With one argument, `matcher(pattern) === match(pattern)`.
+With additional arguments, you can add `$0`, `$1`... additional anonymous matchers.
+
+```js
+var matcher = jsstana.createMatcher("(expr (= a $0))", function (node) {
+  return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
+});
+```
+
+### new jsstana()
+
+Create new jsstana context. You can add new operations to this one.
+
+```js
+var ctx = new jsstana();
+ctx.addMatchers("empty-object", function () {
+  this.assertArguments("empty-object", 0, arguments);
+  return function (node) {
+    return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
+  };
+});
+ctx.match("(empty-object", node);
+```
+
+You may compile submatchers with `this.matcher(sexpr)` and combine their results with `this.combineMatches`.
+`this.assertArguments` checks argument (rator) count, to help validate pattern grammar.
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
@@ -152,6 +185,10 @@ or `istanbul cover grunt simplemocha` to do coverage with istanbul.
 
 ## Release History
 
+- 0.0.11 User-provided patterns
+  - fixed installing on Windows
+  - assignment pattern
+  - anonymous matchers
 - 0.0.10 ident pattern
 - 0.0.9 Boolean patterns
 - 0.0.8 Even more rands
@@ -176,4 +213,3 @@ or `istanbul cover grunt simplemocha` to do coverage with istanbul.
 
 Copyright (c) 2013 Oleg Grenrus.
 Licensed under the BSD3 license.
-
