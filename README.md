@@ -1,6 +1,10 @@
-# jsstana [![Build Status](https://secure.travis-ci.org/phadej/jsstana.png?branch=master)](http://travis-ci.org/phadej/jsstana)
+# jsstana
 
-s-expression match patterns for [Mozilla Parser AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API)
+> s-expression match patterns for [Mozilla Parser AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API)
+
+[![Build Status](https://secure.travis-ci.org/phadej/jsstana.png?branch=master)](http://travis-ci.org/phadej/jsstana)
+[![NPM version](https://badge.fury.io/js/jsstana.png)](http://badge.fury.io/js/jsstana)
+[![Code Climate](https://codeclimate.com/github/phadej/jsstana.png)](https://codeclimate.com/github/phadej/jsstana)
 
 ## Synopsis
 
@@ -47,13 +51,25 @@ Matches if any pattern matches, returns first match.
 
 Matches if all pattern matches, returns combinedMatch
 
+#### (call callee arg0...argn)
+
+Matches `CallExpression`.
+
+`(call fun arg1 arg2)` matches exact amount of arguments,
+for arbitrary arguments use
+`(call fun . ?)` or similar dotted list syntax.
+
+#### (ident name)
+
+Matches `Identifier`.
+
+#### (var name init)
+
+Matches `VariableDeclarator`.
+
 #### (null-node)
 
 Matches `undefined` node.
-
-#### (return value)
-
-Matches `ReturnStatement`.
 
 #### (literal value)
 
@@ -71,25 +87,31 @@ There are some additional version:
 - `(nan)` - matches `NaN`
 - `(undefined)` - matches `undefined`
 
-#### (var name init)
+#### (return value)
 
-Matches `VariableDeclarator`.
-
-#### (ident name)
-
-Matches `Identifier`.
-
-#### (call callee arg0...argn)
-
-Matches `CallExpression`.
-
-`(call fun arg1 arg2)` matches exact amount of arguments,
-for arbitrary arguments use
-`(call fun . ?)` or similar dotted list syntax.
+Matches `ReturnStatement`.
 
 #### (expression expr)
 
 Matches expression statement, `ExpressionStatement`.
+
+#### (throw ex)
+
+Matches `ThrowStatement`.
+
+#### (member object property)
+
+Matches `MemberExpression`.
+
+- (property object property) matches non computed expressions, i.e. `foo.bar`.
+- (subscript object property) matches computed expressions i.e. `foo[bar]`.
+
+#### (lookup var.name)
+
+Helper macro for nested variable access.
+`(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
+
+The `foo.bar.baz` will work as `(lookup foo.bar.baz)` as well.
 
 #### (binary op lhs rhs)
 
@@ -112,24 +134,6 @@ You might want to use `postfix` and `prefix` though.
 #### (assign op var value)
 
 Matches `AssignmentExpression`.
-
-#### (member object property)
-
-Matches `MemberExpression`.
-
-- (property object property) matches non computed expressions, i.e. `foo.bar`.
-- (subscript object property) matches computed expressions i.e. `foo[bar]`.
-
-#### (lookup var.name)
-
-Helper macro for nested variable access.
-`(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
-
-The `foo.bar.baz` will work as `(lookup foo.bar.baz)` as well.
-
-#### (throw ex)
-
-Matches `ThrowStatement`.
 
 #### (ternary test con alt)
 
