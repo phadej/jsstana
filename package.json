@@ -18,7 +18,7 @@
   "licenses": [
     {
       "type": "BSD3",
-      "url": "https://github.com/phadej/jsstana/blob/master/LICENSE-BSD3"
+      "url": "https://github.com/phadej/jsstana/blob/master/LICENSE"
     }
   ],
   "bin": {

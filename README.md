@@ -40,9 +40,7 @@ matchers/operator.js:128:   that.assertArguments("update/postfix/prefix", 2, arg
 matchers/simple.js:7:   this.assertArguments(rator, 1, arguments, 3);
 ```
 
-## Documentation
-
-### Pattern syntax
+## Pattern syntax
 
 #### (not pattern)
 
@@ -80,7 +78,8 @@ Matches `undefined` node.
 
 Matches `Literal`.
 
-There are some additional version:
+There are some additional version::
+
 - `(string value)` - string values
 - `(number value)` - number values
 - `(bool value)` - boolean values
@@ -111,12 +110,12 @@ Matches `MemberExpression`.
 - (property object property) matches non computed expressions, i.e. `foo.bar`.
 - (subscript object property) matches computed expressions i.e. `foo[bar]`.
 
-#### (lookup var.name)
+#### (lookup var.sub.name)
 
 Helper macro for nested variable access.
 `(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
 
-The `foo.bar.baz` will work as `(lookup foo.bar.baz)` as well.
+The atom `foo.bar.baz` works as `(lookup foo.bar.baz)`.
 
 #### (binary op lhs rhs)
 
@@ -143,6 +142,8 @@ Matches `AssignmentExpression`.
 #### (ternary test con alt)
 
 Matches `ConditionalExpression`.
+
+## API
 
 ### match(pattern, node)
 
@@ -183,42 +184,70 @@ ctx.match("(empty-object", node);
 You may compile submatchers with `this.matcher(sexpr)` and combine their results with `this.combineMatches`.
 `this.assertArguments` checks argument (rator) count, to help validate pattern grammar.
 
+
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality.
-Lint and test your code using [Grunt](http://gruntjs.com/).
-Create a pull request, or even an issue.
 
-Use `istanbul cover grunt simplemocha` to do coverage with [istanbul](http://gotwarlost.github.io/istanbul/).
+- Add unit tests for any new or changed functionality.
+- Lint and test your code using [Grunt](http://gruntjs.com/).
+- Use `istanbul cover grunt simplemocha` to run tests with coverage with [istanbul](http://gotwarlost.github.io/istanbul/).
+- Create a pull request
 
 ## Release History
 
 - 0.0.11 User-provided patterns
-  - fixed installing on Windows
-  - assignment pattern
-  - anonymous matchers
+- fixed installing on Windows
+- assignment pattern
+- anonymous matchers
 - 0.0.10 ident pattern
 - 0.0.9 Boolean patterns
 - 0.0.8 Even more rands
-  - unary and update expressions
-  - drop `literal-` prefix (eg plain `string` now)
-  - shorthand binary op syntax `(+ a b)`
-  - shorthand lookup syntax
+- unary and update expressions
+- drop `literal-` prefix (eg plain `string` now)
+- shorthand binary op syntax `(+ a b)`
+- shorthand lookup syntax
 - 0.0.7 jsgrep, third try
 - 0.0.6 jsgrep, second try
 - 0.0.5 jsgrep
-  - also new expression
+- also new expression
 - 0.0.4 Binary and throw
 - 0.0.3 More rands
-  - call dotted syntax
-  - literals
-  - expr - expression statement
-  - use grunt-literate to generate README.md
+- call dotted syntax
+- literals
+- expr - expression statement
+- use grunt-literate to generate README.md
 - 0.0.2 Dev setup
 - 0.0.1 Preview release
 
-## License
 
-Copyright (c) 2013 Oleg Grenrus.
-Licensed under the BSD3 license.
+Copyright Oleg Grenrus 2013
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above
+      copyright notice, this list of conditions and the following
+      disclaimer in the documentation and/or other materials provided
+      with the distribution.
+
+    * Neither the name of Oleg Grenrus nor the names of other
+      contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
