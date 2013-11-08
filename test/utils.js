@@ -18,12 +18,3 @@ describe("traverse()", function () {
     assert(i, 4, "there is 4 nodes");
   });
 });
-
-describe("parseSExpr()", function () {
-  it("works", function () {
-    var actual = jsstana.parseSExpr("(foo bar 1 2 (1 2) 1)");
-    var expected = ["foo", "bar", 1, 2, [1, 2], 1];
-
-    assert.deepEqual(actual, expected);
-  });
-});
