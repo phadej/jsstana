@@ -44,7 +44,15 @@
     "grunt": "~0.4.1",
     "escodegen": "0.0.28"
   },
-  "keywords": [],
+  "keywords": [
+    "ast",
+    "ecmascript",
+    "javascript",
+    "syntax",
+    "match",
+    "pattern",
+    "syntax"
+  ],
   "dependencies": {
     "packrattle": "~2.1.0",
     "underscore": "~1.5.2",
