@@ -12,6 +12,12 @@ describe("match()", function () {
     });
   });
 
+  it("throws if invalid rator is found, suggests", function () {
+    assert.throws(function () {
+      jsstana.match("(cal)");
+    });
+  });
+
   it("throws if invalid s-expression is passed", function () {
     assert.throws(function () {
       jsstana.match("(return");
