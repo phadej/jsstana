@@ -30,10 +30,14 @@ The jsgrep example utility is provided
 
 ```bash
 # find assertArguments calls with 4 arguments
-% jsgrep '(call assertArguments ? ? ? ?)' lib
-jsstana.js:224:   assertArguments("true/false/null/infinity/nan/undefined", 0, arguments, 1);
-jsstana.js:255:   assertArguments("literal", 1, arguments, 1);
-jsstana.js:485:   assertArguments("member/property/subscript", 2, arguments, 1);
+% jsgrep '(call ?.assertArguments ? ? ? ?)' lib
+matchers/literal.js:25:   this.assertArguments("true/false/null/infinity/nan/undefined", 0, arguments, 1);
+matchers/literal.js:111:   this.assertArguments("literal", 1, arguments, 1);
+matchers/member.js:18:   that.assertArguments("member/property/subscript", 2, arguments, 1);
+matchers/operator.js:63:   that.assertArguments(ratorName, 3, arguments, 3);
+matchers/operator.js:98:   that.assertArguments("unary", 2, arguments, 1);
+matchers/operator.js:128:   that.assertArguments("update/postfix/prefix", 2, arguments, 1);
+matchers/simple.js:7:   this.assertArguments(rator, 1, arguments, 3);
 ```
 
 ## Documentation
