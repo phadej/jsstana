@@ -1,0 +1,156 @@
+@import "components/codemirror.less";
+
+@font-face {
+	font-family: "Computer Modern";
+	src: url('fonts/cmunrm.otf');
+}
+@font-face {
+	font-family: "Computer Modern Bold";
+	src: url('fonts/cmunrb.otf');
+}
+@font-face {
+	font-family: "Computer Modern TT";
+	src: url('fonts/cmuntt.otf');
+}
+
+div {
+	padding: 0;
+	margin: 0;
+}
+
+code {
+	padding: 0 2px;
+	border-radius: 2px;
+	border: 1px solid #ddd;
+}
+
+a {
+	color: #369;
+}
+
+p, li, label, a, div#errors {
+	font-family: "Computer Modern", serif;
+}
+
+h1, h2 {
+	font-family: "Computer Modern Bold", serif;
+}
+
+header > h1,
+article > h2,
+article > p {
+	margin-left: 10px;
+}
+
+p, li, label, a, div#errors {
+	font-size: 11pt;
+	line-height: 1.3em;
+}
+
+code, textarea, pre, .CodeMirror, input {
+	font-family: 'Computer Modern TT', monospace;
+	font-size: 10pt;
+	line-height: 1em;
+}
+
+#interactive {
+	padding: 5px 0;
+	background: #eee;
+	min-width: 800px;
+
+	&:after {
+		content: "";
+		clear: both;		
+	}
+}
+
+#code {
+	width: 60%;
+}
+
+#messages {
+	width: 40%;
+}
+
+#code, #messages {
+	float: left;
+	box-sizing: border-box;
+	height: 400px;
+	padding: 5px 10px;
+}
+
+#code textarea,
+#code .CodeMirror,
+.inner {
+	padding: 5px 10px;
+	margin: 0;
+	background: #ddd;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	border: 1px solid #999;
+}
+
+#messages .inner {
+	overflow-x: auto;
+}
+
+#code .CodeMirror-linenumber, #code .CodeMirror-gutters {
+	background: transparent;
+	border-right: none;
+	color: #666;	
+}
+
+#pattern {
+	padding: 5px 10px;
+	box-sizing: border-box;
+	clear: both;
+	width: 100%;
+
+	input {
+		width: 100%;
+		padding: 3px 10px;
+		background: #ddd;
+		border: 1px solid #999;
+		box-sizing: border-box;
+	}
+}
+
+#examples {
+	padding: 5px 10px;
+	box-sizing: border-box;
+	clear: both;
+	width: 100%;	
+}
+
+#pattern .error,
+#code .error {
+	border: 1px solid #c00;
+	background: #fee;
+}
+
+#code .highlight {
+	background: #9cf;
+}
+
+#code .error-line {
+	background: #fdd;
+}
+
+#errors {
+	clear: both;
+	margin: 10px;
+	padding: 5px 10px;
+	border: 1px solid #c00;
+	color: #c00;
+	background: #fee;
+}
+
+#errors:empty {
+	display: none;
+}
+
+.buttons {
+	clear: both;
+	padding: 10px 10px 0;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jsstana</title>
+
+		<link rel="stylesheet" href="web.min.css">
+		<script src="components/jquery-2.0.3.js"></script>
+		<script src="components/Bacon.js"></script>
+		<script src="components/codemirror.js"></script>
+		<script src="components/cm-mode-javascript.js"></script>
+		<script src="web.bundle.js"></script>
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-4812655-5']);
+			_gaq.push(['_trackPageview']);
+			(function() {
+			 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			 })();
+		</script>
+	</head>
+	<body>
+		<header>
+			<h1>jsstana</h1>
+		</header>
+		<article>
+			<p>Find code inside your code!
+			Pattern matching for <a href="https://developer.mozilla.org/en/SpiderMonkey/Parser_API">Mozilla Parser AST</a>,
+			produced e.g. by <a href="http://esprima.org/">esprima</a>.</p>
+			<p>For documentation and code look at <a href="https://github.com/phadej/jsstana" title="GitHub - jsstana">GitHub</a>.</p>
+
+			<div id="interactive">
+				<div id="code">
+					<textarea>// https://github.com/adlawson/z-combinator
+function z(fn) {
+    return (function(recur) {
+        return recur(recur);
+    })(function(r) {
+        return function(x) {
+            return fn(r(r))(x);
+        };
+    });
+};
+
+var factorial = z(function(fn) {
+ 	return function(n) {
+		return 2 >= n ? n : n * fn(n - 1);
+	};
+});
+
+console.log("factorial 5 = ", factorial(5));
+// => 120
+</textarea>
+				</div>
+
+				<div id="messages">
+					<div class="inner cm-s-default ">
+					</div>
+				</div>
+
+				<div id="pattern">
+					<input type="text" value="(call ?fun ?param . ?rest)" />
+				</div>
+
+				<div id="examples">
+					<div class="inner">
+						<a href="#"><code>(call ?fun ?param . ?rest)</code></a>
+						<a href="#"><code>(number ?num)</code></a>
+						<a href="#"><code>(literal ?lit)</code></a>
+						<a href="#"><code>(return ?val)</code></a>
+						<a href="#"><code>(ternary (binary ?op ?lhs ?rhs) ?con ?alt)</code></a>
+					</div>
+				</div>
+
+				<div id="errors"></div>
+
+			</div>
+
+			<p><em>jsstana</em>, by <a href="http://oleg.fi/" title="Oleg Grenrus">Oleg Grenrus</a></p>
+		</article>
+
+		<a href="https://github.com/phadej/jsstana"><img style="position: fixed; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+	</body>
+</html>
