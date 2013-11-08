@@ -13,13 +13,6 @@ module.exports = function(grunt) {
 
       all: { src: "test/**/*.js" }
     },
-    mochacov: {
-      options: {
-        reporter: "html-cov",
-        output: "coverage.html",
-      },
-      all: { src: "test/**/*.js" }
-    },
     jshint: {
       options: {
         jshintrc: ".jshintrc"
@@ -60,7 +53,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-simple-mocha");
-  grunt.loadNpmTasks("grunt-mocha-cov");
   grunt.loadNpmTasks("grunt-literate");
 
   // Default task.

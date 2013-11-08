@@ -188,9 +188,9 @@ You may compile submatchers with `this.matcher(sexpr)` and combine their results
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality.
 Lint and test your code using [Grunt](http://gruntjs.com/).
+Create a pull request, or even an issue.
 
-Use `grunt mochacov` to generate coverage report with blanket,
-or `istanbul cover grunt simplemocha` to do coverage with istanbul.
+Use `istanbul cover grunt simplemocha` to do coverage with [istanbul](http://gotwarlost.github.io/istanbul/).
 
 ## Release History
 
