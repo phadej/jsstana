@@ -60,6 +60,24 @@ describe("unary", function () {
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), { number: 1 });
   });
+
+  describe("special cases", function () {
+    it("delete", function () {
+      var syntax = esprima.parse("delete foo[bar];");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr (delete (subscript foo bar)))");
+
+      assert.deepEqual(matcher(node), {});
+    });
+
+    it("typeof", function () {
+      var syntax = esprima.parse("typeof foo[bar];");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr (typeof (subscript foo bar)))");
+
+      assert.deepEqual(matcher(node), {});
+    });
+  });
 });
 
 describe("~ !", function () {
