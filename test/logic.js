@@ -88,3 +88,43 @@ describe("and", function () {
     assert.deepEqual(matcher(node), undefined);
   });
 });
+
+describe("nor", function () {
+  it("is the same as (not (or ...))", function () {
+    var syntax = esprima.parse("1;");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(nor (number ?a) (string ?b))");
+    var matcher2 = jsstana.match("(not (or (number ?a) (string ?b)))");
+
+    assert.deepEqual(matcher(node), matcher2(node));
+  });
+
+  it("is the same as (not (or ...)), 2", function () {
+    var syntax = esprima.parse("true;");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(nor (number ?a) (string ?b))");
+    var matcher2 = jsstana.match("(not (or (number ?a) (string ?b)))");
+
+    assert.deepEqual(matcher(node), matcher2(node));
+  });
+});
+
+describe("nand", function () {
+  it("is the same as (not (and ...))", function () {
+    var syntax = esprima.parse("1;");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(nand (number ?a) (string ?b))");
+    var matcher2 = jsstana.match("(not (and (number ?a) (string ?b)))");
+
+    assert.deepEqual(matcher(node), matcher2(node));
+  });
+
+  it("is the same as (not (and ...)), 2", function () {
+    var syntax = esprima.parse("true;");
+    var node = syntax.body[0].expression;
+    var matcher = jsstana.match("(nand (number ?a) (literal ?b))");
+    var matcher2 = jsstana.match("(not (and (number ?a) (literal ?b)))");
+
+    assert.deepEqual(matcher(node), matcher2(node));
+  });
+});
