@@ -1,5 +1,9 @@
 ## Release History
 
+- 0.0.13 nand, nor and ?
+	- node capturing
+	- nand and nor
+	- instanceof, typeof, delete and void operators
 - 0.0.12 Code reogranization
 - 0.0.11 User-provided patterns
 	- fixed installing on Windows

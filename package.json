@@ -1,7 +1,7 @@
 {
   "name": "jsstana",
   "description": "s-expression match patterns for Mozilla Parser AST",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "homepage": "https://github.com/phadej/jsstana",
   "author": {
     "name": "Oleg Grenrus",

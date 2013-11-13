@@ -2,6 +2,9 @@
 
 > s-expression match patterns for [Mozilla Parser AST](https://developer.mozilla.org/en-US/docs/SpiderMonkey/Parser_API)
 
+[jsstana](oleg.fi/jsstana) will help you to find exactly the code snippet you are searching for.
+It's much more precise than using grep.
+
 [![Build Status](https://secure.travis-ci.org/phadej/jsstana.png?branch=master)](http://travis-ci.org/phadej/jsstana)
 [![NPM version](https://badge.fury.io/js/jsstana.png)](http://badge.fury.io/js/jsstana)
 [![Dependency Status](https://gemnasium.com/phadej/jsstana.png)](https://gemnasium.com/phadej/jsstana)
@@ -42,6 +45,14 @@ matchers/simple.js:7:   this.assertArguments(rator, 1, arguments, 3);
 
 ## Pattern syntax
 
+#### (?name pattern)
+
+Gives pattern a name, so matching node is also captured.
+
+```js
+jsstana.match("(binary ?op ?lhs (?rhs (or (literal) (ident))))");
+```
+
 #### (not pattern)
 
 Matches when `pattern` doesn't match.
@@ -52,7 +63,11 @@ Matches if any pattern matches, returns first match.
 
 #### (and pattern1 pattern2...)
 
-Matches if all pattern matches, returns combinedMatch
+Matches if all pattern matches, returns combined match.
+
+### (nor pattern) and (nand pattern)
+
+Are the same as `(not (or pattern))` and `(not (and pattern))` respectively.
 
 #### (call callee arg0...argn)
 
@@ -196,6 +211,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.13 nand, nor and ?
+	- node capturing
+	- nand and nor
+	- instanceof, typeof, delete and void operators
 - 0.0.12 Code reogranization
 - 0.0.11 User-provided patterns
 	- fixed installing on Windows
