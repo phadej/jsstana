@@ -56,6 +56,42 @@ function beautifyPath(p) {
   return ret;
 }
 
+function colorizeLine(line, steps) {
+  steps = _.sortBy(steps, "pos");
+
+  var prevPos = 0;
+  var currVal = 0;
+  var buf = "";
+
+  _.each(steps, function (step) {
+    var currPos = step.pos;
+    var part = line.substr(prevPos, currPos - prevPos);
+
+    switch (currVal) {
+      case 0:
+        break;
+      case 1:
+        part = part.red;
+        break;
+      case 2:
+        part = part.yellow;
+        break;
+      case 3:
+        part = part.green;
+        break;
+      default:
+        part = part.blue;
+    }
+
+    buf += part;
+
+    currVal = currVal + step.val;
+    prevPos = currPos;
+  });
+
+  return buf;
+}
+
 function cli(argv) {
   var options = optimist.parse(argv);
 
@@ -106,7 +142,8 @@ function cli(argv) {
 
         estraverse.traverse(syntax, {
           enter: function(node /* , parent */) {
-            if (pattern(node)) {
+            var match = pattern(node);
+            if (match) {
               if (!lines) {
                 lines = contents.toString().split(/\n/);
               }
@@ -123,18 +160,22 @@ function cli(argv) {
                 prefix = lineNumber + ": ";
               }
 
-              var before = line.substr(0, node.loc.start.column - 1);
-              var match;
-              var after;
+              // Gather steps for colorize
+              var steps = [{ val: 1, pos: node.loc.start.column }];
               if (node.loc.start.line === node.loc.end.line) {
-                match = line.substr(node.loc.start.column - 1, node.loc.end.column - node.loc.start.column + 1);
-                after = line.substr(node.loc.end.column);
-              } else {
-                match = line.substr(node.loc.start.column - 1);
-                after = "";
+                steps.push({ val: -1, pos: node.loc.end.column });
               }
 
-              console.log(prefix + before + match.red + after);
+              _.each(match, function (matchNode) {
+                if (matchNode && matchNode.loc) {
+                  steps.push({ val: 1, pos: matchNode.loc.start.column });
+                  steps.push({ val: -1, pos: matchNode.loc.end.column });
+                }
+              });
+              steps.push({ val: -1, pos: line.length });
+
+              // print match
+              console.log(prefix + colorizeLine(line, steps));
             }
           },
         });
