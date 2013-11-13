@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("not", function () {
   it("negates the match", function () {
     var syntax = esprima.parse("1;");
