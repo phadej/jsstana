@@ -157,11 +157,11 @@ function cli(argv) {
 
               var prefix;
               if (options.H && options.n) {
-                prefix = relpath + ":" + lineNumber + ": ";
+                prefix = relpath + ":" + lineNumber + ":";
               } else if (options.H) {
-                prefix = relpath + ": ";
+                prefix = relpath + ":";
               } else if (options.n) {
-                prefix = lineNumber + ": ";
+                prefix = lineNumber + ":";
               }
 
               // Gather steps for colorize
@@ -179,7 +179,7 @@ function cli(argv) {
               steps.push({ val: -1, pos: line.length });
 
               // print match
-              console.log(prefix + colorizeLine(line, steps));
+              console.log(prefix.bold + " " + colorizeLine(line, steps));
             }
           },
         });
