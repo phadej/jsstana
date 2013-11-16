@@ -136,8 +136,12 @@ function cli(argv) {
         relpath = beautifyPath(relpath);
 
         var contents = fs.readFileSync(p);
-        var syntax = esprima.parse(contents, { tolerant: true, range: true, loc: true });
-
+        var syntax;
+        try {
+          syntax = esprima.parse(contents, { tolerant: true, range: true, loc: true });
+        } catch (e) {
+          console.log("Error: ".red + "cannot parse " + relpath.bold + " -- " + e.message);
+        }
         var lines;
 
         estraverse.traverse(syntax, {
