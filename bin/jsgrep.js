@@ -14,6 +14,8 @@ require("colors");
 
 var jsstana = require("../lib/jsstana.js");
 
+var LONG_LINE_LENGTH = 120;
+
 optimist.usage("jsgrep [options] pattern file.js [file2.js] [dir]");
 
 optimist.boolean("h").options("h", {
@@ -36,6 +38,12 @@ optimist.boolean("H").options("H", {
   alias: "file-name",
   describe: "Always print filename headers with output lines.",
   default: true,
+});
+
+optimist.boolean("l").options("l", {
+  alias: "long-lines",
+  describe: "Print long (over " + LONG_LINE_LENGTH + " characters long) lines.",
+  default: false,
 });
 
 function beautifyPath(p) {
@@ -177,6 +185,19 @@ function cli(argv) {
                 }
               });
               steps.push({ val: -1, pos: line.length });
+
+              // truncate line if it's too long
+              if (line.length > LONG_LINE_LENGTH && !options.l) {
+                var start = Math.max(0, steps[0].pos - 10);
+                var linePrefix = (start === 0 ? "" : "..." );
+                var lineSuffix = (start + LONG_LINE_LENGTH < line.length ? "..." : "");
+
+                _.each(steps, function (s) {
+                  s.pos = s.pos - start + (start === 0 ? 0 : 3);
+                });
+
+                line = linePrefix + line.substr(start, LONG_LINE_LENGTH) + lineSuffix;
+              }
 
               // print match
               console.log(prefix.bold + " " + colorizeLine(line, steps));
