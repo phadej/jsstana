@@ -135,14 +135,19 @@ function cli(argv) {
   try {
     pattern = jsstana.match(pattern);
   } catch (e) {
-    console.error("Error: invalid pattern -- " + e.message);
+    console.error("Error: ".red + "invalid pattern -- " + e.message);
     return 1;
   }
 
   _.each(files, function (file) {
     var absfile = path.resolve(file);
 
-    walk.sync(file, { "no_return": true }, function (p /*, stat */) {
+    if (!fs.existsSync(absfile)) {
+      console.log("Error: ".red + " file not exists -- " + file);
+      return;
+    }
+
+    walk.sync(absfile, { "no_return": true }, function (p /*, stat */) {
       p = path.resolve(p);
 
       if (p === absfile || p.match(/\.js$/)) {
