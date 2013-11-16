@@ -211,6 +211,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.14 Better cli experience
+	- Strip shebang by default
+	- Truncate long output lines
+	- Fancier colorize of jsgrep output
+	- Catch parse errors and unexisting files
 - 0.0.13 nand, nor and ?
 	- node capturing
 	- nand and nor
