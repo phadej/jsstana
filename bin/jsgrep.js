@@ -46,6 +46,12 @@ optimist.boolean("l").options("l", {
   default: false,
 });
 
+optimist.boolean("s").options("s", {
+  alias: "shebang",
+  describe: "Strip shebang from input files",
+  default: true,
+});
+
 function beautifyPath(p) {
   var parts = p.split(path.sep).reverse();
 
@@ -144,6 +150,16 @@ function cli(argv) {
         relpath = beautifyPath(relpath);
 
         var contents = fs.readFileSync(p);
+
+        // strip shebang
+        if (options.shebang) {
+          contents = contents.toString();
+          var m = contents.match(/^#![^\n]*\n/);
+          if (m) {
+            contents = contents.substr(m[0].length - 1);
+          }
+        }
+
         var syntax;
         try {
           syntax = esprima.parse(contents, { tolerant: true, range: true, loc: true });
