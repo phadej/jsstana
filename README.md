@@ -138,6 +138,10 @@ Matches `BinaryExpression`.
 
 Also shorthand syntax is supported, `(+ a b)` is the same as `(binary + a b)`.
 
+#### (logical op lhs rhs)
+
+Matches `LogicalExpression`. ie. `&&` and `||` operators.
+
 #### (unary op value)
 
 Matches `UnaryExpression`.
@@ -211,6 +215,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.15 Updates
+	- Dependencies updated
+        - Introduce eslint
+        - Fix logical expressions: `&&` and `||`
 - 0.0.14 Better cli experience
 	- Strip shebang by default
 	- Truncate long output lines

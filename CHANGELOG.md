@@ -1,5 +1,9 @@
 ## Release History
 
+- 0.0.15 Updates
+	- Dependencies updated
+        - Introduce eslint
+        - Fix logical expressions: `&&` and `||`
 - 0.0.14 Better cli experience
 	- Strip shebang by default
 	- Truncate long output lines
