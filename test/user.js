@@ -51,8 +51,8 @@ describe("anonymous matchers", function () {
   it("you can add empty-object anonymously", function () {
     var syntax = esprima.parse("a = {};");
     var node = syntax.body[0];
-    var matcher = jsstana.createMatcher("(expr (= a $0))", function (node) {
-      return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
+    var matcher = jsstana.createMatcher("(expr (= a $0))", function (subnode) {
+      return subnode.type === "ObjectExpression" && subnode.properties.length === 0 ? {} : undefined;
     });
 
     assert.deepEqual(matcher(syntax), undefined);
