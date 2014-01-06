@@ -29,7 +29,8 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "grunt",
+    "check-coverage": "istanbul check-coverage --statements 100 --branches 100 --functions 100 --lines 100 _mocha test"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.8.0",
