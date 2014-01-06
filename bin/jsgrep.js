@@ -9,8 +9,7 @@ var _ = require("underscore");
 var path = require("path");
 var esprima = require("esprima");
 var estraverse = require("estraverse");
-
-require("colors");
+var chalk = require("chalk");
 
 var jsstana = require("../lib/jsstana.js");
 
@@ -85,16 +84,16 @@ function colorizeLine(line, steps) {
       case 0:
         break;
       case 1:
-        part = part.red;
+        part = chalk.red(part);
         break;
       case 2:
-        part = part.yellow;
+        part = chalk.yellow(part);
         break;
       case 3:
-        part = part.green;
+        part = chalk.green(part);
         break;
       default:
-        part = part.blue;
+        part = chalk.blue(part);
     }
 
     buf += part;
@@ -135,7 +134,7 @@ function cli(argv) {
   try {
     pattern = jsstana.match(pattern);
   } catch (e) {
-    console.error("Error: ".red + "invalid pattern -- " + e.message);
+    console.error(chalk.red("Error: ") + "invalid pattern -- " + e.message);
     return 1;
   }
 
@@ -143,7 +142,7 @@ function cli(argv) {
     var absfile = path.resolve(file);
 
     if (!fs.existsSync(absfile)) {
-      console.log("Error: ".red + " file not exists -- " + file);
+      console.log(chalk.red("Error: ") + " file not exists -- " + file);
       return;
     }
 
@@ -169,7 +168,7 @@ function cli(argv) {
         try {
           syntax = esprima.parse(contents, { tolerant: true, range: true, loc: true });
         } catch (e) {
-          console.log("Error: ".red + "cannot parse " + relpath.bold + " -- " + e.message);
+          console.log(chalk.red("Error: ") + "cannot parse " + relpath.bold + " -- " + e.message);
         }
         var lines;
 
@@ -221,7 +220,7 @@ function cli(argv) {
               }
 
               // print match
-              console.log(prefix.bold + " " + colorizeLine(line, steps));
+              console.log(chalk.bold(prefix) + " " + colorizeLine(line, steps));
             }
           },
         });
