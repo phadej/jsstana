@@ -29,11 +29,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt",
-    "blanket": {
-      "pattern": "lib",
-      "data-cover-never": "node_modules"
-    }
+    "test": "grunt"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.8.0",
