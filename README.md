@@ -162,6 +162,10 @@ Matches `AssignmentExpression`.
 
 Matches `ConditionalExpression`.
 
+#### (fn-expr)
+
+Matches `FunctionExpression`.
+
 ## API
 
 ### match(pattern, node)
@@ -215,6 +219,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.16 Updates
+	- Dependencies updated
+	- `fn-expr` matches function expressions
 - 0.0.15 Updates
 	- Dependencies updated
         - Introduce eslint

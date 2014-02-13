@@ -1,5 +1,8 @@
 ## Release History
 
+- 0.0.16 Updates
+	- Dependencies updated
+	- `fn-expr` matches function expressions
 - 0.0.15 Updates
 	- Dependencies updated
         - Introduce eslint
