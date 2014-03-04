@@ -77,6 +77,10 @@ Matches `CallExpression`.
 for arbitrary arguments use
 `(call fun . ?)` or similar dotted list syntax.
 
+#### (new class arg0...argn)
+
+Matches `NewExpression`.
+
 #### (ident name)
 
 Matches `Identifier`.
@@ -103,8 +107,12 @@ There are some additional version::
 - `(false)` - matches `false`
 - `(null)` - matches `null`
 - `(infinity)` - matches `Infinity`
-- `(nan)` - matches `NaN`
-- `(undefined)` - matches `undefined`
+- `(nan)` - matches `NaN`, also `(NaN)` is supported
+- `(undefined)` - matches `undefined`, also `(Infinity)` is supported
+
+#### (this)
+
+Matches `ThisExpression`.
 
 #### (return value)
 
@@ -117,6 +125,14 @@ Matches expression statement, `ExpressionStatement`.
 #### (throw ex)
 
 Matches `ThrowStatement`.
+
+#### (break)
+
+Matches `BreakStatement`.
+
+#### (continue)
+
+Matches `ContinueStatement`.
 
 #### (member object property)
 
@@ -219,6 +235,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.17 this, break &amp; continue
+	- Added forementioned matchers
 - 0.0.16 Updates
 	- Dependencies updated
 	- `fn-expr` matches function expressions
