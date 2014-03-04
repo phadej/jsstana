@@ -73,10 +73,42 @@ describe("plain constants", function () {
       assert.deepEqual(matcher(node), undefined);
   });
 
-  it("false != null", function () {
+  it("true != null", function () {
       var syntax = esprima.parse("true;");
       var node = syntax.body[0];
       var matcher = jsstana.match("(expr null)");
+
+      assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("null !== undefined", function () {
+      var syntax = esprima.parse("null;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr undefined)");
+
+      assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("null !== nan", function () {
+      var syntax = esprima.parse("null;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr NaN)");
+
+      assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("NaN ~= NaN", function () {
+      var syntax = esprima.parse("NaN;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr NaN)");
+
+      assert.deepEqual(matcher(node), {});
+  });
+
+  it("null !== Infinity", function () {
+      var syntax = esprima.parse("null;");
+      var node = syntax.body[0];
+      var matcher = jsstana.match("(expr Infinity)");
 
       assert.deepEqual(matcher(node), undefined);
   });
