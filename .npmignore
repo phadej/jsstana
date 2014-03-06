@@ -1,0 +1,13 @@
+.npmignore
+.jshintrc
+.eslintrc
+.travis.yml
+
+examples/
+coverage/
+test/
+
+Gruntfile.js
+
+CONTRIBUTING.md
+CHANGELOG.md
