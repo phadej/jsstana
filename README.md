@@ -235,6 +235,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.18 null checks
+	- Also updated dependencies
 - 0.0.17 this, break &amp; continue
 	- Added forementioned matchers
 - 0.0.16 Updates
