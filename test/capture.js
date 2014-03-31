@@ -22,6 +22,6 @@ describe("capture: ?", function () {
     var matcher = jsstana.match("(?node literal ?val)");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), { node: { type: "Literal", value: true }, val: true });
+    assert.deepEqual(matcher(node), { node: { type: "Literal", value: true, raw: "true" }, val: true });
   });
 });
