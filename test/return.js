@@ -22,7 +22,7 @@ describe("return", function () {
     var matcher = jsstana.match("(return ?value)");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), { value: { type: "Literal", value: 1 } });
+    assert.deepEqual(matcher(node), { value: { type: "Literal", value: 1, raw: "1" } });
   });
 
   it("first argument may be identifier", function () {

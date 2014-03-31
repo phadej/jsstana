@@ -31,6 +31,6 @@ describe("throw", function () {
     var matcher = jsstana.match("(throw ?ex)");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node), { ex: { type: "Literal", value: "foo" } });
+    assert.deepEqual(matcher(node), { ex: { type: "Literal", value: "foo", raw: "'foo'" } });
   });
 });
