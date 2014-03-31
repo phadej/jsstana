@@ -48,7 +48,7 @@
     "syntax"
   ],
   "dependencies": {
-    "packrattle": "~2.1.0",
+    "packrattle": "~3.0.1",
     "underscore": "~1.6.0",
     "walkdir": "0.0.7",
     "optimist": "~0.6.0",
