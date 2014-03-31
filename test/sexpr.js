@@ -5,6 +5,13 @@ var sexpr = require("../lib/sexpr.js");
 var assert = require("assert");
  
 describe("parse()", function () {
+  it("parses number", function () {
+    var expected = 123;
+    var s = "123";
+
+    assert.deepEqual(sexpr.parse(s), expected);
+  });
+
   it("parses s-expressions", function () {
     var expected = ["foo", 1, 2, ["bar", 3, "1 + 2"]];
     var s = "(foo 1 2 (bar 3 '1 + 2'))";
