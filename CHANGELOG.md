@@ -1,5 +1,6 @@
 ## Release History
 
+- 0.0.19 dependency updates
 - 0.0.18 null checks
 	- Also updated dependencies
 - 0.0.17 this, break &amp; continue

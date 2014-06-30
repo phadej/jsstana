@@ -5,10 +5,10 @@
 [jsstana](oleg.fi/jsstana) will help you to find exactly the code snippet you are searching for.
 It's much more precise than using grep.
 
-[![Build Status](https://secure.travis-ci.org/phadej/jsstana.png?branch=master)](http://travis-ci.org/phadej/jsstana)
-[![NPM version](https://badge.fury.io/js/jsstana.png)](http://badge.fury.io/js/jsstana)
-[![Dependency Status](https://gemnasium.com/phadej/jsstana.png)](https://gemnasium.com/phadej/jsstana)
-[![Code Climate](https://codeclimate.com/github/phadej/jsstana.png)](https://codeclimate.com/github/phadej/jsstana)
+[![Build Status](https://secure.travis-ci.org/phadej/jsstana.svg?branch=master)](http://travis-ci.org/phadej/jsstana)
+[![NPM version](https://badge.fury.io/js/jsstana.svg)](http://badge.fury.io/js/jsstana)
+[![Dependency Status](https://gemnasium.com/phadej/jsstana.svg)](https://gemnasium.com/phadej/jsstana)
+[![Code Climate](https://img.shields.io/codeclimate/github/phadej/jsstana.svg)](https://codeclimate.com/github/phadej/jsstana)
 
 ## Synopsis
 
@@ -235,6 +235,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.19 dependency updates
 - 0.0.18 null checks
 	- Also updated dependencies
 - 0.0.17 this, break &amp; continue
