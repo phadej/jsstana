@@ -235,6 +235,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.20 Dependency update
 - 0.0.19 dependency updates
 - 0.0.18 null checks
 	- Also updated dependencies
