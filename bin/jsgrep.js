@@ -2,7 +2,7 @@
 
 "use strict";
 
-var optimist = require("optimist");
+var program = require("commander");
 var fs = require("fs");
 var walk = require("walkdir");
 var _ = require("underscore");
@@ -15,41 +15,13 @@ var jsstana = require("../lib/jsstana.js");
 
 var LONG_LINE_LENGTH = 120;
 
-optimist.usage("jsgrep [options] pattern file.js [file2.js] [dir]");
+var pkgJson = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json")).toString());
 
-optimist.boolean("h").options("h", {
-  alias: "help",
-  describe: "Show brief help information",
-});
-
-optimist.boolean("v").options("v", {
-  alias: "version",
-  describe: "Display version information and exit.",
-});
-
-optimist.boolean("n").options("n", {
-  alias: "line-number",
-  describe: "Each output line is preceded by its relative line number in the file.",
-  default: true,
-});
-
-optimist.boolean("H").options("H", {
-  alias: "file-name",
-  describe: "Always print filename headers with output lines.",
-  default: true,
-});
-
-optimist.boolean("l").options("l", {
-  alias: "long-lines",
-  describe: "Print long (over " + LONG_LINE_LENGTH + " characters long) lines.",
-  default: false,
-});
-
-optimist.boolean("s").options("s", {
-  alias: "shebang",
-  describe: "Strip shebang from input files",
-  default: true,
-});
+program.usage("[options] pattern file.js [file2.js] [dir]");
+program.option("-n, --line-number",   "Each output line is preceded by its relative line number in the file.", false);
+program.option("-H, --file-name",     "Always print filename headers with output lines.", false);
+program.option("-l, --long-lines",    "Print long (over " + LONG_LINE_LENGTH + " characters long) lines.", true);
+program.option("-s, --strip-shebang", "Strip shebang from input files", false);
 
 function beautifyPath(p) {
   var parts = p.split(path.sep).reverse();
@@ -106,27 +78,20 @@ function colorizeLine(line, steps) {
 }
 
 function cli(argv) {
-  var options = optimist.parse(argv);
+  program.parse(argv);
+  if (program.stripShebang === undefined) { program.stripShebang = true; }
+  if (program.lineNumber === undefined) { program.lineNumber = true; }
+  if (program.fileName === undefined) { program.fileName = true; }
+  if (program.longLines === undefined) { program.longLines = false; }
 
-  if (options.help) {
-    console.log(optimist.help());
-    return 0;
-  }
-
-  if (options.version) {
-    var pkg = JSON.parse(fs.readFileSync(__dirname + "/../package.json"));
-    console.log("jsgrep, part of jsstana version " + pkg.version);
-    return 0;
-  }
-
-  if (options._.length < 1) {
+  if (program.rawArgs.length < 1) {
     console.error("Error: pattern is required");
-    console.log(optimist.help());
+    console.log(program.help());
     return 0;
   }
 
-  var pattern = options._[0];
-  var files = options._.slice(1);
+  var pattern = program.args[0];
+  var files = program.args.slice(1);
   if (files.length === 0) {
     files = ["."];
   }
@@ -156,7 +121,7 @@ function cli(argv) {
         var contents = fs.readFileSync(p);
 
         // strip shebang
-        if (options.shebang) {
+        if (program["strip-shebang"]) {
           contents = contents.toString();
           var m = contents.match(/^#![^\n]*\n/);
           if (m) {
@@ -184,12 +149,14 @@ function cli(argv) {
               var line = lines[lineNumber - 1];
 
               var prefix;
-              if (options.H && options.n) {
+              if (program.lineNumber && program.fileName) {
                 prefix = relpath + ":" + lineNumber + ":";
-              } else if (options.H) {
+              } else if (program.fileName) {
                 prefix = relpath + ":";
-              } else if (options.n) {
+              } else if (program.lineNumber) {
                 prefix = lineNumber + ":";
+              } else {
+                prefix = "";
               }
 
               // Gather steps for colorize
@@ -207,7 +174,7 @@ function cli(argv) {
               steps.push({ val: -1, pos: line.length });
 
               // truncate line if it's too long
-              if (line.length > LONG_LINE_LENGTH && !options.l) {
+              if (line.length > LONG_LINE_LENGTH && !program.longLines) {
                 var start = Math.max(0, steps[0].pos - 10);
                 var linePrefix = (start === 0 ? "" : "..." );
                 var lineSuffix = (start + LONG_LINE_LENGTH < line.length ? "..." : "");
@@ -229,5 +196,5 @@ function cli(argv) {
   });
 }
 
-var ret = cli(process.argv.slice(2));
+var ret = cli(process.argv);
 process.exit(ret);
