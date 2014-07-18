@@ -43,6 +43,7 @@ matchers/operator.js:128:   that.assertArguments("update/postfix/prefix", 2, arg
 matchers/simple.js:7:   this.assertArguments(rator, 1, arguments, 3);
 ```
 
+
 ## Pattern syntax
 
 #### (?name pattern)
@@ -53,21 +54,27 @@ Gives pattern a name, so matching node is also captured.
 jsstana.match("(binary ?op ?lhs (?rhs (or (literal) (ident))))");
 ```
 
+
 #### (not pattern)
 
 Matches when `pattern` doesn't match.
+
 
 #### (or pattern1 pattern2...)
 
 Matches if any pattern matches, returns first match.
 
+
 #### (and pattern1 pattern2...)
 
 Matches if all pattern matches, returns combined match.
 
+
 ### (nor pattern) and (nand pattern)
 
 Are the same as `(not (or pattern))` and `(not (and pattern))` respectively.
+
+
 
 #### (call callee arg0...argn)
 
@@ -81,17 +88,24 @@ for arbitrary arguments use
 
 Matches `NewExpression`.
 
+
+
 #### (ident name)
 
 Matches `Identifier`.
+
 
 #### (var name init)
 
 Matches `VariableDeclarator`.
 
+
+
 #### (null-node)
 
 Matches `undefined` node.
+
+
 
 #### (literal value)
 
@@ -110,29 +124,38 @@ There are some additional version::
 - `(nan)` - matches `NaN`, also `(NaN)` is supported
 - `(undefined)` - matches `undefined`, also `(Infinity)` is supported
 
+
 #### (this)
 
 Matches `ThisExpression`.
+
+
 
 #### (return value)
 
 Matches `ReturnStatement`.
 
+
 #### (expression expr)
 
 Matches expression statement, `ExpressionStatement`.
+
 
 #### (throw ex)
 
 Matches `ThrowStatement`.
 
+
 #### (break)
 
 Matches `BreakStatement`.
 
+
 #### (continue)
 
 Matches `ContinueStatement`.
+
+
 
 #### (member object property)
 
@@ -141,12 +164,15 @@ Matches `MemberExpression`.
 - (property object property) matches non computed expressions, i.e. `foo.bar`.
 - (subscript object property) matches computed expressions i.e. `foo[bar]`.
 
+
 #### (lookup var.sub.name)
 
 Helper macro for nested variable access.
 `(lookup foo.bar.baz)` is equivalent to `(property (property foo bar) baz)`.
 
 The atom `foo.bar.baz` works as `(lookup foo.bar.baz)`.
+
+
 
 #### (binary op lhs rhs)
 
@@ -158,11 +184,13 @@ Also shorthand syntax is supported, `(+ a b)` is the same as `(binary + a b)`.
 
 Matches `LogicalExpression`. ie. `&&` and `||` operators.
 
+
 #### (unary op value)
 
 Matches `UnaryExpression`.
 
 Also shorthand version works for `!` and `~`: `(~ ?foo)` is the same as `(unary ~ ?foo)`.
+
 
 #### (update op value)
 
@@ -170,19 +198,27 @@ Matches `UpdateExpression`.
 
 You might want to use `postfix` and `prefix` though.
 
+
 #### (assign op var value)
 
 Matches `AssignmentExpression`.
+
+
 
 #### (ternary test con alt)
 
 Matches `ConditionalExpression`.
 
+
+
 #### (fn-expr)
 
 Matches `FunctionExpression`.
 
+
+
 ## API
+
 
 ### match(pattern, node)
 
@@ -194,6 +230,7 @@ This function is autocurried ie. when one argument is passed, returns function `
 
 This function is also memoized on the pattern, ie each pattern is compiled only once.
 
+
 ### createMatcher(pattern, [posMatcher])
 
 Create matcher. With one argument, `matcher(pattern) === match(pattern)`.
@@ -204,6 +241,7 @@ var matcher = jsstana.createMatcher("(expr (= a $0))", function (node) {
   return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
 });
 ```
+
 
 ### new jsstana()
 
@@ -235,6 +273,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.0.21 Use commander
 - 0.0.20 Dependency update
 - 0.0.19 dependency updates
 - 0.0.18 null checks
