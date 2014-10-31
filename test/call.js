@@ -74,29 +74,49 @@ describe("call", function () {
     assert.deepEqual(matcher(node), undefined);
   });
 
-  it("can use (call fun . ?) to match rest arguments", function () {
+  it("can use (call fun ??) to match rest arguments", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.match("(call (lookup module.fun) . ?)");
+    var matcher = jsstana.match("(call (lookup module.fun) ?...)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
   });
 
-  it("can use (call . ?dotted-syntax) to capture rest arguments", function () {
+  it("can use (call ??rest) to capture rest arguments", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.match("(call (lookup module.fun) foo ? . ?rest)");
+    var matcher = jsstana.match("(call (lookup module.fun) foo ? ??rest)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node).rest.length, 2);
   });
 
-  it("should have pattern variable after dot", function () {
+  it("can use (call ??prefix ?param) to capture prefix variable-arguments", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) ??prefix quux)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node).prefix.length, 3);
+  });
+
+  it("can use (call ?param-a ??infix ?param-bb) to capture infix variable-arguments", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) foo ??infix quux)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node).infix.length, 3);
+  });
+
+  it("supports only single ??parameter", function () {
     assert.throws(function () {
-      jsstana.match("(call foo . foo)");
+      jsstana.match("(call ??prefix ??suffix)");
     });
   });
 });
