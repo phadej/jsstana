@@ -32,11 +32,12 @@
     "test": "make test"
   },
   "devDependencies": {
+    "david": "^5.0.0",
     "escodegen": "~1.4.0",
-    "mocha": "~1.21.4",
-    "ljs": "~0.2.0",
+    "istanbul": "~0.3.0",
     "jshint": "~2.5.1",
-    "istanbul": "~0.3.0"
+    "ljs": "~0.2.0",
+    "mocha": "~1.21.4"
   },
   "keywords": [
     "ast",

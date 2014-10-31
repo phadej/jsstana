@@ -1,15 +1,16 @@
 all : test
 
-.PHONY : all test jshint mocha istanbul ljs README.md dist
+.PHONY : all test jshint mocha istanbul ljs david README.md dist
 
 BINDIR=node_modules/.bin
 
 MOCHA=$(BINDIR)/_mocha
 ISTANBUL=$(BINDIR)/istanbul
 JSHINT=$(BINDIR)/jshint
+DAVID=$(BINDIR)/david
 LJS=$(BINDIR)/ljs
 
-test : jshint mocha istanbul
+test : jshint mocha istanbul david
 
 jshint :
 	$(JSHINT) lib/*.js
@@ -25,6 +26,9 @@ ljs : README.md
 
 README.md :
 	$(LJS) -c false -o README.md lib/jsstana.js
+
+david :
+	$(DAVID)
 
 dist : test ljs
 	git clean -fdx -e node_modules
