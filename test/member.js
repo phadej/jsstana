@@ -35,6 +35,24 @@ describe("member", function () {
       assert.deepEqual(matcher(node), {});
     });
 
+    it("identifier $", function () {
+      var syntax = esprima.parse("$.bar");
+      var node = syntax.body[0].expression;
+      var matcher = jsstana.match("(member $)");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
+
+    it("identifier _", function () {
+      var syntax = esprima.parse("_.bar");
+      var node = syntax.body[0].expression;
+      var matcher = jsstana.match("(member _)");
+
+      assert.deepEqual(matcher(syntax), undefined);
+      assert.deepEqual(matcher(node), {});
+    });
+
     it("non-matching identifier", function () {
       var syntax = esprima.parse("foo.bar");
       var node = syntax.body[0].expression;
