@@ -68,7 +68,7 @@ describe("new", function () {
     var syntax = esprima.parse("new module.Foo(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.match("(new (lookup module.Foo) . ?)");
+    var matcher = jsstana.match("(new (lookup module.Foo) ??)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
@@ -78,15 +78,9 @@ describe("new", function () {
     var syntax = esprima.parse("new module.Foo(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.match("(new (lookup module.Foo) foo ? . ?rest)");
+    var matcher = jsstana.match("(new (lookup module.Foo) foo ? ??rest)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node).rest.length, 2);
-  });
-
-  it("should have pattern variable after dot", function () {
-    assert.throws(function () {
-      jsstana.match("(new Foo . foo)");
-    });
   });
 });

@@ -78,10 +78,20 @@ describe("call", function () {
     var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
     var node = syntax.body[0].expression;
 
-    var matcher = jsstana.match("(call (lookup module.fun) ?...)");
+    var matcher = jsstana.match("(call (lookup module.fun) ??)");
 
     assert.deepEqual(matcher(syntax), undefined);
     assert.deepEqual(matcher(node), {});
+  });
+
+  it("matches minimum amount of arguments, when there are variable arguments", function () {
+    var syntax = esprima.parse("module.fun(foo)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) foo bar ??)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("can use (call ??rest) to capture rest arguments", function () {
@@ -111,12 +121,30 @@ describe("call", function () {
     var matcher = jsstana.match("(call (lookup module.fun) foo ??infix quux)");
 
     assert.deepEqual(matcher(syntax), undefined);
-    assert.deepEqual(matcher(node).infix.length, 3);
+    assert.deepEqual(matcher(node).infix.length, 2);
+  });
+
+  it("prefix arguments are matched", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) bar ??infix quux)");
+
+    assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("postfix arguments are matched", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call (lookup module.fun) foo ??infix bar)");
+
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("supports only single ??parameter", function () {
     assert.throws(function () {
-      jsstana.match("(call ??prefix ??suffix)");
+      jsstana.match("(call ?fun ??prefix ??suffix)");
     });
   });
 });
