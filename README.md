@@ -273,6 +273,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.1.2 Fix bug, identifier could start with underscore: `_`
 - 0.1.1 New (call) syntax
     - `(call ?fun ?param ?params ?last-one)`
 - 0.0.22 dependency updates
