@@ -18,6 +18,7 @@ var LONG_LINE_LENGTH = 120;
 var pkgJson = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json")).toString());
 
 program.usage("[options] pattern file.js [file2.js] [dir]");
+program.version(pkgJson.version);
 program.option("-n, --line-number",   "Each output line is preceded by its relative line number in the file.", false);
 program.option("-H, --file-name",     "Always print filename headers with output lines.", false);
 program.option("-l, --long-lines",    "Print long (over " + LONG_LINE_LENGTH + " characters long) lines.", true);
@@ -138,7 +139,7 @@ function cli(argv) {
         var lines;
 
         estraverse.traverse(syntax, {
-          enter: function(node /* , parent */) {
+          enter: function (node /* , parent */) {
             var match = pattern(node);
             if (match) {
               if (!lines) {
@@ -176,7 +177,7 @@ function cli(argv) {
               // truncate line if it's too long
               if (line.length > LONG_LINE_LENGTH && !program.longLines) {
                 var start = Math.max(0, steps[0].pos - 10);
-                var linePrefix = (start === 0 ? "" : "..." );
+                var linePrefix = (start === 0 ? "" : "...");
                 var lineSuffix = (start + LONG_LINE_LENGTH < line.length ? "..." : "");
 
                 _.each(steps, function (s) {

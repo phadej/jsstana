@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("this", function () {
   it("matches operator", function () {
     var syntax = esprima.parse("this;");

@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("break", function () {
   it("matches", function () {
     var syntax = esprima.parse("while (true) { break; }");

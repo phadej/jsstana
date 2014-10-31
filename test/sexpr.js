@@ -3,7 +3,7 @@
 
 var sexpr = require("../lib/sexpr.js");
 var assert = require("assert");
- 
+
 describe("parse()", function () {
   it("parses number", function () {
     var expected = 123;

@@ -16,7 +16,7 @@ describe("not", function () {
     assert.deepEqual(matcher(node), {});
   });
 
-   it("negates the match", function () {
+  it("negates the match", function () {
     var syntax = esprima.parse("1;");
     var node = syntax.body[0].expression;
     var matcher = jsstana.match("(not 1)");

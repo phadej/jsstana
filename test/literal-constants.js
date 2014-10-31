@@ -18,99 +18,99 @@ var constants = {
 
 describe("plain constants", function () {
   it("null", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr null)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr null)");
 
-      assert.deepEqual(matcher(node), {});
+    assert.deepEqual(matcher(node), {});
   });
 
   it("null", function () {
-      var syntax = esprima.parse("true;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr true)");
+    var syntax = esprima.parse("true;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr true)");
 
-      assert.deepEqual(matcher(node), {});
+    assert.deepEqual(matcher(node), {});
   });
 
   it("null", function () {
-      var syntax = esprima.parse("false;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr false)");
+    var syntax = esprima.parse("false;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr false)");
 
-      assert.deepEqual(matcher(node), {});
+    assert.deepEqual(matcher(node), {});
   });
 
   it("numbers", function () {
-      var syntax = esprima.parse("1;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr 1)");
+    var syntax = esprima.parse("1;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr 1)");
 
-      assert.deepEqual(matcher(node), {});
+    assert.deepEqual(matcher(node), {});
   });
 
   it("numbers", function () {
-      var syntax = esprima.parse("1;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr 2)");
+    var syntax = esprima.parse("1;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr 2)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("null != false", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr false)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr false)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("null != true", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr true)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr true)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("true != null", function () {
-      var syntax = esprima.parse("true;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr null)");
+    var syntax = esprima.parse("true;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr null)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("null !== undefined", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr undefined)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr undefined)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("null !== nan", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr NaN)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr NaN)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 
   it("NaN ~= NaN", function () {
-      var syntax = esprima.parse("NaN;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr NaN)");
+    var syntax = esprima.parse("NaN;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr NaN)");
 
-      assert.deepEqual(matcher(node), {});
+    assert.deepEqual(matcher(node), {});
   });
 
   it("null !== Infinity", function () {
-      var syntax = esprima.parse("null;");
-      var node = syntax.body[0];
-      var matcher = jsstana.match("(expr Infinity)");
+    var syntax = esprima.parse("null;");
+    var node = syntax.body[0];
+    var matcher = jsstana.match("(expr Infinity)");
 
-      assert.deepEqual(matcher(node), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 });
 
@@ -136,14 +136,14 @@ _.each(constants, function (jsvalue, rator) {
 
     _.each(constants, function (jsvalue2, rator2) {
       if (rator !== rator2) {
-       it("doesn't match literal " + jsvalue2, function () {
-        var syntax = esprima.parse(jsvalue2);
-        var node = syntax.body[0];
-        var matcher = jsstana.match("(expr (" + rator + "))");
+        it("doesn't match literal " + jsvalue2, function () {
+          var syntax = esprima.parse(jsvalue2);
+          var node = syntax.body[0];
+          var matcher = jsstana.match("(expr (" + rator + "))");
 
-        assert.deepEqual(matcher(syntax), undefined);
-        assert.deepEqual(matcher(node), undefined);
-      });
+          assert.deepEqual(matcher(syntax), undefined);
+          assert.deepEqual(matcher(node), undefined);
+        });
       }
     });
   });

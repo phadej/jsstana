@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("literal", function () {
   describe("zero arguments", function () {
     it("matches literal strings", function () {

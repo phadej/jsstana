@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("return", function () {
   it("zero argument version matches any return statement", function () {
     var syntax = esprima.parse("(function () { return 1; })");

@@ -5,7 +5,7 @@ var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
 var esprima = require("esprima");
- 
+
 describe("fn-expr", function () {
   it("matches function expressions", function () {
     var syntax = esprima.parse("(function () { return 1; })");

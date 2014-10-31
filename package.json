@@ -34,7 +34,9 @@
   "devDependencies": {
     "david": "^5.0.0",
     "escodegen": "~1.4.0",
+    "eslint": "^0.9.1",
     "istanbul": "~0.3.0",
+    "jscs": "^1.7.3",
     "jshint": "~2.5.1",
     "ljs": "~0.2.0",
     "mocha": "~2.0.1"

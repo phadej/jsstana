@@ -4,7 +4,7 @@
 var jsstana = require("../lib/jsstana.js");
 
 var assert = require("assert");
- 
+
 describe("match()", function () {
   it("throws if invalid rator is found", function () {
     assert.throws(function () {
