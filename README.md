@@ -273,7 +273,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-- 0.1.0 New (call) syntax
+- 0.1.1 New (call) syntax
     - `(call ?fun ?param ?params ?last-one)`
 - 0.0.22 dependency updates
 - 0.0.21 Use commander
