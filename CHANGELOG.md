@@ -1,5 +1,7 @@
 ## Release History
 
+- 0.1.4 &ndash; *2014-11-09* &ndash; jsstana.eslintRule
+    - `(object)` matcher
 - 0.1.3 Multiple multi-param matching groups in `(call)`
 
     Example: `(call ? ?? 0 ??)` checks whether function has zero as any argument.

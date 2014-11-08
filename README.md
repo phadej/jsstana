@@ -217,6 +217,12 @@ Matches `FunctionExpression`.
 
 
 
+#### (object)
+
+Matches `ObjectExpression`.
+
+
+
 ## API
 
 
@@ -241,6 +247,9 @@ var matcher = jsstana.createMatcher("(expr (= a $0))", function (node) {
   return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
 });
 ```
+
+
+### eslintRule(pattern, f)
 
 
 ### new jsstana()
@@ -273,6 +282,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.1.4 &ndash; *2014-11-09* &ndash; jsstana.eslintRule
+    - `(object)` matcher
 - 0.1.3 Multiple multi-param matching groups in `(call)`
 
     Example: `(call ? ?? 0 ??)` checks whether function has zero as any argument.
