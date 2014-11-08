@@ -273,6 +273,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+- 0.1.3 Multiple multi-param matching groups in `(call)`
+
+    Example: `(call ? ?? 0 ??)` checks whether function has zero as any argument.
+
 - 0.1.2 Fix bug, identifier could start with underscore: `_`
 - 0.1.1 New (call) syntax
     - `(call ?fun ?param ?params ?last-one)`
