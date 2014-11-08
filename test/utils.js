@@ -79,3 +79,15 @@ describe("partitions", function () {
     return result.length === binomialCoefficient(m + n - 1, n);
   });
 });
+
+describe("some", function () {
+  var or = function (a, b) {
+    return a || b;
+  };
+
+  jsc.property("same as arr.map(f).reduce(or, undefined)", "array nat", "nat -> bool | nat 2", function (arr, f) {
+    var a = utils.some(arr, f);
+    var b = arr.map(f).reduce(or, undefined);
+    return a === b;
+  });
+});
