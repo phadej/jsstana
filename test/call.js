@@ -142,9 +142,33 @@ describe("call", function () {
     assert.deepEqual(matcher(node), undefined);
   });
 
-  it("supports only single ??parameter", function () {
-    assert.throws(function () {
-      jsstana.match("(call ?fun ??prefix ??suffix)");
-    });
+  it("supports multiple ?? params", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call ? ?? ??)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), {});
+  });
+
+  it("fails if callee doesn't match, when there are multiple ?? params", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call f ?? ??)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
+  });
+
+  it("multiple params failing example 1", function () {
+    var syntax = esprima.parse("module.fun(foo, bar, baz, quux)");
+    var node = syntax.body[0].expression;
+
+    var matcher = jsstana.match("(call f ?? foo baz ??)");
+
+    assert.deepEqual(matcher(syntax), undefined);
+    assert.deepEqual(matcher(node), undefined);
   });
 });
