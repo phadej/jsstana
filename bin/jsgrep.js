@@ -197,5 +197,7 @@ function cli(argv) {
   });
 }
 
-var ret = cli(process.argv);
-process.exit(ret);
+var returnCode = cli(process.argv);
+/* eslint-disable no-process-exit */
+process.exit(returnCode);
+/* eslint-enable no-process-exit */

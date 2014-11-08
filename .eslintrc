@@ -3,6 +3,17 @@
     "node": true
   },
   "rules": {
+    "npm-require-name": 2,
+    "suspicious-throw": 2,
+    "promise-done-params": 2,
+    "promise-done": 2,
+    "promise-then": 2,
+    "no-direct-classlist": 2,
+    "no-jquery-classlist": 2,
+    "underscore-extend-two-objects": 2,
+    "underscore-sort-uniq-1": 2,
+    "underscore-sort-uniq-2": 2,
+    "underscore-sort-uniq-3": 2,
     "no-comma-dangle": 0
   }
 }

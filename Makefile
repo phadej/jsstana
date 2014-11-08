@@ -20,12 +20,12 @@ jshint :
 	$(JSHINT) $(SRC)
 
 eslint :
-	$(JSHINT) $(SRC)
+	$(ESLINT) --rulesdir eslint-rules $(SRC)
 
 jscs :
 	$(JSCS) $(SRC)
 
-mocha : 
+mocha :
 	$(MOCHA) --reporter=spec test
 
 istanbul :
