@@ -1,4 +1,5 @@
 /* global describe:true, it:true */
+/* eslint-disable new-cap */
 "use strict";
 
 var jsstana = require("../lib/jsstana.js");
