@@ -15,8 +15,8 @@ describe("user provided pattern operations", function () {
     var ctx = new jsstana();
     ctx.addMatcher("empty-object", function () {
       this.assertArguments("empty-object", 0, arguments);
-      return function (node) {
-        return node.type === "ObjectExpression" && node.properties.length === 0 ? {} : undefined;
+      return function (nodex) {
+        return nodex.type === "ObjectExpression" && nodex.properties.length === 0 ? {} : undefined;
       };
     });
 
@@ -35,9 +35,9 @@ describe("user provided pattern operations", function () {
       this.assertArguments("my-if", 1, arguments);
       expr = expr || "?";
       var exprMatcher = this.matcher(expr);
-      return function (node) {
-        if (node.type !== "IfStatement") { return undefined; }
-        return exprMatcher(node.test);
+      return function (nodex) {
+        if (nodex.type !== "IfStatement") { return undefined; }
+        return exprMatcher(nodex.test);
       };
     });
 

@@ -1,6 +1,7 @@
 ## Release History
 
-- 0.1.4 &ndash; *2014-11-09* &ndash; jsstana.eslintRule
+- 0.1.5 &mdash; *2014-02-25* &mdash; Dependency bump
+- 0.1.4 &mdash; *2014-11-09* &ndash; jsstana.eslintRule
     - `(object)` matcher
 - 0.1.3 Multiple multi-param matching groups in `(call)`
 

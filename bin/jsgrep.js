@@ -19,10 +19,12 @@ var pkgJson = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.jso
 
 program.usage("[options] pattern file.js [file2.js] [dir]");
 program.version(pkgJson.version);
+/* eslint-disable no-multi-spaces */
 program.option("-n, --line-number",   "Each output line is preceded by its relative line number in the file.", false);
 program.option("-H, --file-name",     "Always print filename headers with output lines.", false);
 program.option("-l, --long-lines",    "Print long (over " + LONG_LINE_LENGTH + " characters long) lines.", true);
 program.option("-s, --strip-shebang", "Strip shebang from input files", false);
+/* eslint-enable no-multi-spaces */
 
 function beautifyPath(p) {
   var parts = p.split(path.sep).reverse();
