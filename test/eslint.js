@@ -12,7 +12,7 @@ describe("eslintRule", function () {
     var node = syntax.body[0].expression;
     var eslintContext = function () {};
 
-    var module = jsstana.eslintRule("(object)", function (context /*, node, m */) {
+    var module = jsstana.eslintRule("(object)", function (context) {
       assert(context === eslintContext);
     })(eslintContext);
 

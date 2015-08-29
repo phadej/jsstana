@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-sync */
 
 "use strict";
 
@@ -73,7 +74,7 @@ function colorizeLine(line, steps) {
 
     buf += part;
 
-    currVal = currVal + step.val;
+    currVal += step.val;
     prevPos = currPos;
   });
 
@@ -114,7 +115,7 @@ function cli(argv) {
       return;
     }
 
-    walk.sync(absfile, { "no_return": true }, function (p /*, stat */) {
+    walk.sync(absfile, { "no_return": true }, function (p) { // eslint-disable-line quote-props
       p = path.resolve(p);
 
       if (p === absfile || p.match(/\.js$/)) {

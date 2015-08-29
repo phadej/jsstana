@@ -7,6 +7,7 @@ var assert = require("assert");
 var esprima = require("esprima");
 var _ = require("underscore");
 
+/* eslint-disable quote-props */
 var constants = {
   "null": "null",
   "false": "false",
@@ -15,6 +16,7 @@ var constants = {
   "infinity": "Infinity",
   "undefined": "undefined",
 };
+/* eslint-enable quote-props */
 
 describe("plain constants", function () {
   it("null", function () {

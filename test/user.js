@@ -14,7 +14,7 @@ describe("user provided pattern operations", function () {
 
     var ctx = new jsstana();
     ctx.addMatcher("empty-object", function () {
-      this.assertArguments("empty-object", 0, arguments);
+      this.assertArguments("empty-object", 0, arguments); // eslint-disable-line no-invalid-this
       return function (nodex) {
         return nodex.type === "ObjectExpression" && nodex.properties.length === 0 ? {} : undefined;
       };
@@ -32,9 +32,10 @@ describe("user provided pattern operations", function () {
 
     var ctx = new jsstana();
     ctx.addMatcher("my-if", function (expr) {
-      this.assertArguments("my-if", 1, arguments);
+      this.assertArguments("my-if", 1, arguments); // eslint-disable-line no-invalid-this
       expr = expr || "?";
-      var exprMatcher = this.matcher(expr);
+      var exprMatcher = this.matcher(expr); // eslint-disable-line no-invalid-this
+
       return function (nodex) {
         if (nodex.type !== "IfStatement") { return undefined; }
         return exprMatcher(nodex.test);

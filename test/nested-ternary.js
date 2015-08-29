@@ -9,7 +9,7 @@ var esprima = require("esprima");
 var source = [
   "var str = (age < 1) ? 'baby' :",
   "  (age < 5) ? 'toddler' :",
-  "  (age < 18) ? 'child': 'adult';"
+  "  (age < 18) ? 'child': 'adult';",
 ].join("\n");
 
 describe("nested-ternary", function () {
