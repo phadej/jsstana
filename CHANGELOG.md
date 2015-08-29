@@ -1,5 +1,6 @@
 ## Release History
 
+- 0.1.6 &mdash; *2015-08-28* &mdash; Depdenency update
 - 0.1.5 &mdash; *2014-02-25* &mdash; Dependency bump
 - 0.1.4 &mdash; *2014-11-09* &ndash; jsstana.eslintRule
     - `(object)` matcher
