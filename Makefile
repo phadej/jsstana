@@ -1,36 +1,28 @@
 all : test
 
-.PHONY : all test jshint eslint jscs mocha istanbul ljs david README.md dist
+.PHONY : all test eslint mocha istanbul ljs david README.md dist
 
 BINDIR=node_modules/.bin
 
 MOCHA=$(BINDIR)/_mocha
-ISTANBUL=$(BINDIR)/istanbul
-JSHINT=$(BINDIR)/jshint
+NYC=$(BINDIR)/nyc
 ESLINT=$(BINDIR)/eslint
-JSCS=$(BINDIR)/jscs
 DAVID=$(BINDIR)/david
 LJS=$(BINDIR)/ljs
 
 SRC=lib bin test
 
-test : jshint eslint jscs mocha istanbul david
-
-jshint :
-	$(JSHINT) $(SRC)
+test : eslint mocha istanbul david
 
 eslint :
 	$(ESLINT) --rulesdir eslint-rules $(SRC)
-
-jscs :
-	$(JSCS) $(SRC)
 
 mocha :
 	$(MOCHA) --reporter=spec test
 
 istanbul :
-	$(ISTANBUL) cover $(MOCHA) test
-	$(ISTANBUL) check-coverage --statements 100 --branches 100 --functions 100 --lines 100
+	$(NYC) $(MOCHA) test
+	$(NYC) check-coverage --statements 100 --branches 100 --functions 100 --lines 100
 
 ljs : README.md
 

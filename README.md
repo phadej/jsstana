@@ -7,8 +7,6 @@ It's much more precise than using grep.
 
 [![Build Status](https://secure.travis-ci.org/phadej/jsstana.svg?branch=master)](http://travis-ci.org/phadej/jsstana)
 [![NPM version](https://badge.fury.io/js/jsstana.svg)](http://badge.fury.io/js/jsstana)
-[![Dependency Status](https://gemnasium.com/phadej/jsstana.svg)](https://gemnasium.com/phadej/jsstana)
-[![Code Climate](https://img.shields.io/codeclimate/github/phadej/jsstana.svg)](https://codeclimate.com/github/phadej/jsstana)
 
 ## Synopsis
 

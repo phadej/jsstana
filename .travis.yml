@@ -1,9 +1,18 @@
+sudo: false
 language: node_js
+
 node_js:
-  - "0.12"
-  - "0.10"
-  - "0.11"
-  - "iojs"
+  - "11"
+  - "10"
+  - "8"
+  - "8.10" # bionic
+
+  # Timeouts?
+  # - "6"
+
+  # eslint doesn't support node 4 anymore?
+  # - "4"
+  # - "4.2"  # xenial
 
 branches:
   only:
